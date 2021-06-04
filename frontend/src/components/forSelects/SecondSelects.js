@@ -4,14 +4,15 @@ import { DataContext } from "../DataContext";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-function Selects() {
-  const { countries, cityValue, setCityValue } = useContext(DataContext);
+function SecondSelects() {
+  const { localsCountries, localsCityValue, setLocalsCityValue } =
+    useContext(DataContext);
   const [countryValue, setCountryValue] = useState("");
   const [countryError, setCountryError] = useState("");
   const [cityError, setCityError] = useState("");
   const cityRef = useRef(null);
 
-  const options1 = countries.map((nation) => {
+  const options1 = localsCountries.map((nation) => {
     return { label: nation.country, value: nation.code };
   });
 
@@ -20,7 +21,7 @@ function Selects() {
 
   {
     countryValue &&
-      (findCity = countries.find((nation) => {
+      (findCity = localsCountries.find((nation) => {
         if (countryValue.label === nation.country) {
           options2 = nation.cities.map((city) => {
             return { label: city, value: city };
@@ -34,13 +35,13 @@ function Selects() {
     control: (styles, state) => ({
       ...styles,
       width: "250px",
-      border: "3px solid #cbb162",
+      border: "2px solid #051747",
       boxShadow: "none",
       color: "#cbb162",
       "&:hover": {
         borderColor: "#cbb162",
         cursor: "pointer",
-      },
+      }
     }),
 
     option: (styles, state) => {
@@ -76,60 +77,66 @@ function Selects() {
 
   return (
     <SelectsWrapper>
-      <CountryLabel htmlFor="country-select">Select a country</CountryLabel>
-      <Wrapper1 error={countryError}>
-        <Select
-          id="country-select"
-          onChange={(value) => {
-            console.log("taco2", cityRef.current);
-            cityRef.current.state.label = "";
-            cityRef.current.state.value = "";
-            setCountryValue(value);
-            setCountryError("");
-            setCityValue("");
-          }}
-          placeholder="Countries"
-          options={options1}
-          styles={customStyles}
-        />
-      </Wrapper1>
-      <CountryLabel htmlFor="city-select">Select a city</CountryLabel>
-      <Wrapper2 error={cityError}>
-        <Select
-          id="city-select"
-          ref={cityRef}
-          placeholder="Cities"
-          styles={customStyles}
-          options={options2}
-          noOptionsMessage={() => "Country is not selected."}
-          onChange={(value) => {
-            setCityValue(value);
-            setCityError("");
-            // setCountryError("Required");
-          }}
-        />
-      </Wrapper2>
-      {countryValue && !cityValue ? (
+      <Row>
+        <CountryLabel htmlFor="country-select">Select a country</CountryLabel>
+        <Wrapper1 error={countryError}>
+          <Select
+            id="country-select"
+            onChange={(value) => {
+              console.log("taco2", cityRef.current);
+              cityRef.current.state.label = "";
+              cityRef.current.state.value = "";
+              setCountryValue(value);
+              setCountryError("");
+              setLocalsCityValue("");
+            }}
+            placeholder="Countries"
+            options={options1}
+            styles={customStyles}
+          />
+        </Wrapper1>
+      </Row>
+      <Row2>
+        <CountryLabel htmlFor="city-select">Select a city</CountryLabel>
+        <Wrapper2 error={cityError}>
+          <Select
+            id="city-select"
+            ref={cityRef}
+            placeholder="Cities"
+            styles={customStyles}
+            options={options2}
+            noOptionsMessage={() => "Country is not selected."}
+            onChange={(value) => {
+              setLocalsCityValue(value);
+              setCityError("");
+              // setCountryError("Required");
+            }}
+          />
+        </Wrapper2>
+      </Row2>
+      {countryValue && !localsCityValue ? (
         <ShowLocals
-          to={`/locals/${cityValue.label}`}
+          to={`/locals/${localsCityValue.label}`}
           onClick={(e) => {
             e.preventDefault();
             setCityError("* REQUIRED *");
           }}
         >
-          Discover Locals
+          Search
         </ShowLocals>
-      ) : countryValue && cityValue ? (
-        <ShowLocals to={`/locals/${cityValue.label}`}>Discover locals</ShowLocals>
+      ) : countryValue && localsCityValue ? (
+        <ShowLocals to={`/locals/${localsCityValue.label}`}>
+          Search
+        </ShowLocals>
       ) : (
         <ShowLocals
-          to={`/locals/${cityValue.label}`}
+          to={`/locals/${localsCityValue.label}`}
           onClick={(e) => {
             e.preventDefault();
             setCountryError("* REQUIRED *");
           }}
         >
-          Discover Locals
+          Search
         </ShowLocals>
       )}
     </SelectsWrapper>
@@ -141,30 +148,43 @@ const ShowLocals = styled(Link)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  margin-top: 50px;
+  margin-top: 33px;
+  margin-left: 20px;
   height: 40px;
-  width: 250px;
+  width: 150px;
   border-radius: 5px;
   border: none;
-  color: #000000;
-  background-color: #cbb162;
+  color: #fefefe;
+  background-color: #051747;
   font-size: 18px;
   font-weight: 400;
 
   &:hover {
-    background-color: #fefefe;
+    background-color: #cbb162;
     transition: all 0.2s ease-in-out;
+    color: #000000
+  }
+
+  @media screen and (max-width: 825px){
+      flex-direction: column;
+      margin-left: 0;
+
   }
 `;
 
 const SelectsWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  margin-top: 20px;
+
+  @media screen and (max-width: 825px){
+      flex-direction: column;
+      align-items: center;
+  }
 `;
 
 const CountryLabel = styled.label`
   margin-bottom: 10px;
-  color: #fefefe;
+  color: #000000;
   font-size: 20px;
   font-weight: 600;
 `;
@@ -182,6 +202,10 @@ const Wrapper1 = styled.div`
   }`
     );
   }}
+
+@media screen and (max-width:825px){
+      margin-bottom: 20px;
+  }
 `;
 
 const Wrapper2 = styled.div`
@@ -197,4 +221,17 @@ const Wrapper2 = styled.div`
   }}
 `;
 
-export default Selects;
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Row2 = styled.div`
+margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width:825px){
+      margin-left: 0;
+  }
+`;
+export default SecondSelects;

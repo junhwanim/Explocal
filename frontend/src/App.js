@@ -1,20 +1,29 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route,} from "react-router-dom";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
-import Navbar from './components/Navbar'
+import Locals from './pages/Locals'
+import LocalDetail from "./pages/LocalDetail";
 
 function App() {
-
   return (
-    <Router>
-      <Navbar />
+    <BrowserRouter>
       <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/signin" component={Signin} exact />
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/signin">
+          <Signin />
+        </Route>
+        <Route exact path="/locals/:city">
+          <Locals />
+        </Route>
+        <Route exact path="/local/:id">
+          <LocalDetail/>
+        </Route>
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 
