@@ -33,7 +33,7 @@ export const DataProvider = ({ children }) => {
         setCityValue,
         localsCountries,
         localsCityValue,
-        setLocalsCityValue
+        setLocalsCityValue,
       }}
     >
       {children}

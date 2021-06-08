@@ -158,11 +158,16 @@ const ShowLocals = styled(Link)`
   background-color: #051747;
   font-size: 18px;
   font-weight: 400;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     background-color: #cbb162;
-    transition: all 0.2s ease-in-out;
-    color: #000000
+    color: #000000;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 
   @media screen and (max-width: 825px){

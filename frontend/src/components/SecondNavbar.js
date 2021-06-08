@@ -9,10 +9,12 @@ function SecondNavbar() {
         scroll.scrollToTop();
       };
 
+    let path = window.location.pathname
+
     return (
-        <NavbarContainer>
+        <NavbarContainer path={path}>
             <NavLogo to="/" onClick={toggleHome}>
-              <FaSuitcase style={{ marginRight: "7px", fontSize: "2rem"  }} />
+              <LogoIcon style={{ marginRight: "7px", fontSize: "2rem"  }} />
               Explocal
             </NavLogo>
         </NavbarContainer>
@@ -27,7 +29,10 @@ const NavbarContainer = styled.div`
   width: 100%;
   padding: 0 24px;
   max-width: 100vw;
-  background-color: #051747;
+  background-color: ${({path})=>path.includes("/local/")? "transparent" : "#051747" };
+`;
+
+const LogoIcon = styled(FaSuitcase)`
 `;
 
 const NavLogo = styled(Link)`
@@ -40,6 +45,13 @@ const NavLogo = styled(Link)`
   margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
+
+  &:hover {
+    color: #cbb162;
+    ${LogoIcon} {
+      fill: #cbb162;
+    }
+  }
 `;
 
 export default SecondNavbar

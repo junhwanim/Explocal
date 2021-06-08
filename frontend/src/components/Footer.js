@@ -20,7 +20,7 @@ function Footer() {
         <SocialMedia>
           <SocialMediaWrapper>
             <SocialLogo to="/" onClick={toggleHome}>
-              <FaSuitcase style={{ marginRight: "7px", fontSize: "1.5rem" }} />
+              <LogoIcon style={{ marginRight: "7px", fontSize: "1.5rem" }} />
               Explocal
             </SocialLogo>
             <CopyRight>
@@ -87,6 +87,9 @@ const SocialMediaWrapper = styled.div`
   }
 `;
 
+const LogoIcon = styled(FaSuitcase)`
+`;
+
 const SocialLogo = styled(LinkS)`
   color: #fff;
   justify-self: start;
@@ -99,6 +102,13 @@ const SocialLogo = styled(LinkS)`
 
   @media screen and (max-width: 825px) {
     margin-bottom: 16px;
+  }
+
+  &:hover {
+    color: #cbb162;
+    ${LogoIcon} {
+      fill: #cbb162;
+    }
   }
 `;
 

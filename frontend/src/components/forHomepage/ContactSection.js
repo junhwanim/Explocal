@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ContactSVG from "../../images/contact.svg";
 import { GrLocation, GrPhone } from "react-icons/gr";
 import { AiOutlineMail } from "react-icons/ai";
-import { keyframes } from "styled-components";
 
 function ContactSection() {
   return (
@@ -137,22 +136,17 @@ const EmailIcon = styled(AiOutlineMail)`
   margin-right: 10px;
 `;
 
-const anchorTag = keyframes`
-from{
-  transform: scale(1.1); 
-  -webkit-transform:scale(1.1);
-}
-to{
-  transform: scale(1.0);
-  -webkit-transform:scale(1.0);
-}
-`;
-
 const AnimationDiv = styled.div`
+  transition: all 0.2s ease-in-out;
+
   &:hover {
-    animation: ${anchorTag} 0.6s linear;
-    animation-fill-mode: forwards;
-    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    color: #051747;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 `;
 
@@ -175,17 +169,9 @@ const EmailLink = styled.a`
     width: 0%;
     height: 3px;
     background-color: #fff;
-    background: #ffd89b; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to left,
-      #19547b,
-      #ffd89b
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #19547b,
-      #ffd89b
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ffd89b;
+    background: -webkit-linear-gradient(to left, #19547b, #ffd89b);
+    background: linear-gradient(to right, #19547b, #ffd89b);
 
     position: absolute;
     top: 100%;

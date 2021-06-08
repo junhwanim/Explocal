@@ -32,7 +32,7 @@ function Navbar({ toggle }) {
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
             <NavLogo to="/" onClick={toggleHome}>
-              <FaSuitcase style={{ marginRight: "7px", fontSize: "2rem"  }} />
+              <LogoIcon style={{ marginRight: "7px", fontSize: "2rem"  }} />
               Explocal
             </NavLogo>
             <MobileIcon onClick={toggle}>
@@ -119,6 +119,10 @@ const NavbarContainer = styled.div`
   max-width: 95vw;
 `;
 
+const LogoIcon = styled(FaSuitcase)`
+`;
+
+
 const NavLogo = styled(LinkR)`
   color: #fff;
   justify-self: flex-start;
@@ -129,6 +133,13 @@ const NavLogo = styled(LinkR)`
   margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
+
+  &:hover {
+    color: #cbb162;
+    ${LogoIcon} {
+      fill: #cbb162;
+    }
+  }
 `;
 
 const MobileIcon = styled.div`

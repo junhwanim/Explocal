@@ -150,10 +150,15 @@ const ShowLocals = styled(Link)`
   background-color: #cbb162;
   font-size: 18px;
   font-weight: 400;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     background-color: #fefefe;
-    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 `;
 

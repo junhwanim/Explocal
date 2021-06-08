@@ -154,6 +154,7 @@ const Local = styled(Link)`
   &:hover {
     background-color: rgba(203, 177, 98, 0.6);
     transform: scale(1.03);
+    cursor: pointer;
   }
 
   &:active {
