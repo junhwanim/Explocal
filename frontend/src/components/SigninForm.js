@@ -1,97 +1,108 @@
-import React, {useContext} from 'react'
-import styled from 'styled-components'
-
+import React, { useContext, useState } from "react";
+import styled from "styled-components";
+import { DataContext } from "../components/DataContext";
+import { useHistory } from "react-router-dom";
 
 function SigninForm() {
+  const { allUsers, setCurrentUser } = useContext(DataContext);
+  const [inputUsername, setInputUsername] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const [authFailed, setAuthFailed] = useState("");
+  const history = useHistory();
 
+  const handlerButton = () => {
+    for (let i = 0; i < allUsers.length; i++) {
+      if (
+        allUsers[i].username.toLowerCase() === inputUsername.toLowerCase() &&
+        allUsers[i].password === Number(inputPassword)
+      ) {
+        localStorage.setItem("currentUser", JSON.stringify(allUsers[i]));
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+        history.push("/");
+      } else {
+        setAuthFailed("Username or Password incorrect");
+      }
+    }
+  };
 
-    return (
-        <SigninFormContainer>
-            <InputDiv>
-            <OuterSpan>
-              <Input
-                className="inputText"
-                type="text"
-                name="username"
-                required
-              />
-              <InnerSpan className="floating-label">Username</InnerSpan>
-            </OuterSpan>
-          </InputDiv>
-          <InputDiv>
-            <OuterSpan>
-              <Input
-                className="inputText"
-                type="text"
-                name="password"
-                required
-              />
-              <InnerSpan className="floating-label">Password</InnerSpan>
-            </OuterSpan>
-          </InputDiv>
-          <FindPassword>Forgot your password?</FindPassword>
-          <BtnWrap>
-              <Btn>Signin</Btn>
-          </BtnWrap>
-          <ConvertPage>Don't have an account? <Anchor href="#">Signup</Anchor></ConvertPage>
-        </SigninFormContainer>
-    )
+  return (
+    <SigninFormContainer>
+      <InputDiv>
+        <OuterSpan>
+          <Input
+            className="inputText"
+            type="text"
+            name="username"
+            required
+            onChange={(e) => {
+              setInputUsername(e.target.value);
+              setAuthFailed("");
+            }}
+          />
+          <InnerSpan className="floating-label">Username</InnerSpan>
+        </OuterSpan>
+      </InputDiv>
+      <InputDiv>
+        <OuterSpan>
+          <Input
+            className="inputText"
+            type="password"
+            name="password"
+            required
+            onChange={(e) => {
+              setInputPassword(e.target.value);
+              setAuthFailed("");
+            }}
+            style={{letterSpacing: "4px"}}
+          />
+          <InnerSpan className="floating-label">Password</InnerSpan>
+        </OuterSpan>
+      </InputDiv>
+      <FindPassword>Forgot your password?</FindPassword>
+      <ErrorMessage authFailed={authFailed}>{authFailed}</ErrorMessage>
+      <BtnWrap>
+        <Btn onClick={handlerButton}>Signin</Btn>
+      </BtnWrap>
+    </SigninFormContainer>
+  );
 }
 
-const Anchor = styled.a`
-color: #cbb162;
-text-decoration: none;
-font-size: 1rem;
-margin-left: 5px;
-color: RGBA(5,23,71,1);
-
-&:visited {
-    color: RGBA(5,23,71,1)
-}
-
-&:hover {
-    cursor: pointer;
-    color: #cbb162;
-}
-
-`;
-
-const ConvertPage = styled.p`
-margin-top: 30px;
-font-size: 0.9rem;
-color: rgba(0,0,0,0.5);
+const ErrorMessage = styled.p`
+  color: red;
+  margin-top: 10px;
+  visibility: ${({ authFailed }) => (authFailed ? "visible" : "hidden")};
 `;
 
 const Btn = styled.button`
-width: 150px;
-height: 35px;
-font-size: 1.1rem;
-align-self: center;
-border: none;
-background-color: #051747;
-color: #fff;
-border-radius: 5px;
-transition: all 0.2s ease-in-out;
-cursor: pointer;
+  width: 150px;
+  height: 35px;
+  font-size: 1.1rem;
+  align-self: center;
+  border: none;
+  background-color: #051747;
+  color: #fff;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 
-&:hover {
+  &:hover {
     background-color: #cbb162;
     color: #051747;
     transform: scale(1.1);
-}
+  }
 
-&:active {
+  &:active {
     transform: scale(0.9);
-}
+  }
 `;
 
 const BtnWrap = styled.div`
-margin-top: 50px;
+  margin-top: 50px;
 `;
 
 const FindPassword = styled.p`
-margin-top: 10px;
-opacity: 0.5;
+  margin-top: 10px;
+  opacity: 0.5;
 `;
 
 const Input = styled.input`
@@ -99,8 +110,8 @@ const Input = styled.input`
   width: 350px;
   height: 40px;
   outline: none;
-  border:none;
-  box-shadow: RGBA(5,23,71,0.5) 0px 0px 3px 0px;
+  border: none;
+  box-shadow: RGBA(5, 23, 71, 0.5) 0px 0px 3px 0px;
   border-radius: 5px;
 
   &:focus ~ .floating-label,
@@ -111,8 +122,8 @@ const Input = styled.input`
     border-bottom: 2px solid #051747;
   }
 
-  @media screen and (max-width:600px){
-      width: 280px;
+  @media screen and (max-width: 600px) {
+    width: 280px;
   }
 `;
 
@@ -138,11 +149,11 @@ const InputDiv = styled.div`
 `;
 
 const SigninFormContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
 `;
 
-export default SigninForm
+export default SigninForm;

@@ -8,6 +8,8 @@ export const DataProvider = ({ children }) => {
   const [cityValue, setCityValue] = useState("");
   const [localsCountries, setLocalsCountries] = useState([]);
   const [localsCityValue, setLocalsCityValue] = useState([]);
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")))
+  const [active, setActive] = useState("signin");
 
   useEffect(() => {
     fetch("/api/destinations")
@@ -34,6 +36,10 @@ export const DataProvider = ({ children }) => {
         localsCountries,
         localsCityValue,
         setLocalsCityValue,
+        currentUser,
+        setCurrentUser,
+        active,
+        setActive
       }}
     >
       {children}

@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { FaBars, FaSuitcase } from "react-icons/fa";
+import React, { useState, useEffect, useContext } from "react";
+import { FaBars, FaSuitcase} from "react-icons/fa";
 import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
 import { Link as LinkS } from "react-scroll";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
-
+import { DataContext } from "../components/DataContext";
 
 function Navbar({ toggle }) {
+  const { currentUser, setCurrentUser, setActive} = useContext(DataContext);
   const [scrollNav, setScrollNav] = useState(false);
 
   const changeNav = () => {
@@ -32,7 +33,7 @@ function Navbar({ toggle }) {
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
             <NavLogo to="/" onClick={toggleHome}>
-              <LogoIcon style={{ marginRight: "7px", fontSize: "2rem"  }} />
+              <LogoIcon style={{ marginRight: "7px", fontSize: "2rem" }} />
               Explocal
             </NavLogo>
             <MobileIcon onClick={toggle}>
@@ -77,9 +78,25 @@ function Navbar({ toggle }) {
                   </NavLinks>
                 </NavItem>
               </NavMenu>
-              <NavBtn>
-                <NavBtnLink to="/signin">Sign In</NavBtnLink>
-              </NavBtn>
+              {currentUser ? (
+                <CurrentUser>
+                  <Greeting>Welcome, {currentUser.name}</Greeting>
+                  <NavBtn>
+                    <NavBtnClick
+                      onClick={() => {
+                        localStorage.clear();
+                        setCurrentUser("");
+                      }}
+                    >
+                      Sign out
+                    </NavBtnClick>
+                  </NavBtn>
+                </CurrentUser>
+              ) : (
+                <NavBtn>
+                  <NavBtnLink to="/signin" onClick={()=>setActive("signin")}>Sign In</NavBtnLink>
+                </NavBtn>
+              )}
             </AlignToRight>
           </NavbarContainer>
         </Nav>
@@ -87,6 +104,16 @@ function Navbar({ toggle }) {
     </>
   );
 }
+
+const Greeting = styled.p`
+  color: #fff;
+`;
+
+const CurrentUser = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Nav = styled.nav`
   background: ${({ scrollNav }) => (scrollNav ? "#051747" : "transparent")};
@@ -119,9 +146,7 @@ const NavbarContainer = styled.div`
   max-width: 95vw;
 `;
 
-const LogoIcon = styled(FaSuitcase)`
-`;
-
+const LogoIcon = styled(FaSuitcase)``;
 
 const NavLogo = styled(LinkR)`
   color: #fff;
@@ -194,14 +219,19 @@ const NavLinks = styled(LinkS)`
 const NavBtn = styled.nav`
   display: flex;
   align-items: center;
+  transition: all 0.3 ease-in-out;
+
+  &:active {
+    transform: scale(0.9);
+  }
 
   @media screen and (max-width: 825px) {
     display: none;
   }
 `;
 
-const NavBtnLink = styled(LinkR)`
-  border-radius: 50px;
+const NavBtnClick = styled.button`
+  border-radius: 5px;
   background: #cbb162;
   white-space: nowrap;
   padding: 10px 22px;
@@ -210,7 +240,26 @@ const NavBtnLink = styled(LinkR)`
   outline: none;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease-ease-in-out;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+
+  &:hover {
+    background: #fff;
+    color: #010606;
+  }
+`;
+
+const NavBtnLink = styled(LinkR)`
+  border-radius: 5px;
+  background: #cbb162;
+  white-space: nowrap;
+  padding: 10px 22px;
+  color: #000000;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
   text-decoration: none;
 
   &:hover {

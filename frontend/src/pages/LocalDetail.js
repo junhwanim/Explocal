@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import SecondNavbar from "../components/SecondNavbar";
@@ -8,11 +8,15 @@ import ReactStars from "react-rating-stars-component";
 import { FaStarHalfAlt, FaStar, FaRegStar } from "react-icons/fa";
 import { AiOutlineCheck } from "react-icons/ai";
 import { FaLongArrowAltLeft } from "react-icons/fa";
+import { DataContext } from "../components/DataContext";
+import { CgUnavailable } from "react-icons/cg";
+import { Link } from "react-router-dom";
 import {
   FaTwitterSquare,
   FaInstagramSquare,
   FaFacebookSquare,
 } from "react-icons/fa";
+import ScrollToTop from "../components/ScrollToTop";
 
 const starsRating = {
   size: 30,
@@ -43,9 +47,15 @@ function LocalDetail() {
   const [inputValue, setInputValue] = useState(null);
   const [starValue, setStarValue] = useState(null);
   const [reload, setReload] = useState(true);
+  const [starKeyForce, setStarKeyForce] = useState(0);
+  const { currentUser, allUsers } = useContext(DataContext);
   const { id } = useParams();
   const history = useHistory();
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    setStarKeyForce((prev) => prev + 1);
+  }, [starValue, reload]);
 
   useEffect(() => {
     if (!reload) {
@@ -68,12 +78,17 @@ function LocalDetail() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ rateNum: starValue, rateReview: inputValue }),
+        body: JSON.stringify({
+          rateNum: starValue,
+          rateReview: inputValue,
+          reviewer: currentUser.name,
+        }),
       })
         .then((res) => res.json())
         .then((data) => {
           console.log("Success:", data);
           setReload(true);
+          setStarValue(0);
         })
         .catch((error) => {
           console.log("Fail");
@@ -81,11 +96,29 @@ function LocalDetail() {
     }
   };
 
-  console.log(inputValue);
-  console.log(starValue);
+  const getNumbers = user.rating?.map((num) => {
+    return num.rate;
+  });
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const addedNumber = getNumbers?.reduce(reducer) / user.rating?.length;
+
+  const sortedReviews = user.rating?.sort((a, b) => {
+    const d1 = Date.parse(a.timeStamp);
+    const d2 = Date.parse(b.timeStamp);
+    return d2 - d1;
+  });
+
+  const findUser = (findName) => {
+    for (let i = 0; i < allUsers.length; i++) {
+      if (allUsers[i].name === findName) {
+        return allUsers[i]._id;
+      }
+    }
+  };
 
   return (
     <>
+      <ScrollToTop />
       <Background></Background>
       <SecondNavbar style={{ width: "100%" }} />
       <DetailContainer>
@@ -98,7 +131,7 @@ function LocalDetail() {
             Go Back to Main Page
           </ArrowIconWrap>
           <RowDiv>
-            <Img src={user.avatarSrc} />
+            <Img src={user.avatarSrc} isAvailable={user.local} />
             <TextWrapper>
               <Name>{user.name}</Name>
               <City>
@@ -107,32 +140,56 @@ function LocalDetail() {
                   ? `The ${user.country}`
                   : `${user.country}`}
               </City>
-              <Bio>{user.bio}</Bio>
-              <Row href={`mailto:${user.email}`}>
+              <RatingWrap>
                 <IconWrapper>
-                  <MdEmail size={17} />
+                  <FaStar size={17} style={{ color: "#cbb162" }} />
                 </IconWrapper>
-                <Email>{user.email}</Email>
-              </Row>
-              <Icons>
-                <SocialIconLink>
-                  <Twitter size={35} />
-                </SocialIconLink>
-                <SocialIconLink
-                  href="https://www.instagram.com/jh_im_______/"
-                  target="_blank"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={35} />
-                </SocialIconLink>
-                <SocialIconLink
-                  href="https://www.facebook.com/profile.php?id=100004271558231"
-                  target="_blank"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={35} />
-                </SocialIconLink>
-              </Icons>
+                <Rate>
+                  {Number.isInteger(addedNumber)
+                    ? addedNumber.toFixed(0)
+                    : addedNumber.toFixed(1)}{" "}
+                  / 5{" "}
+                  <span style={{ marginLeft: "15px" }}>
+                    ({user.rating?.length}{" "}
+                    {user.rating?.length > 1 ? "reviews" : "review"})
+                  </span>
+                </Rate>
+              </RatingWrap>
+              <Bio>{user.bio}</Bio>
+              {user.local === false ? (
+                <UnavailableWrap>
+                  <CgUnavailable size={20} style={{ marginRight: "5px" }} />
+                  <Unavailable>Unavailable for the moment</Unavailable>
+                </UnavailableWrap>
+              ) : (
+                <>
+                  <Row href={`mailto:${user.email}`}>
+                    <IconWrapper>
+                      <MdEmail size={17} />
+                    </IconWrapper>
+                    <Email>{user.email}</Email>
+                  </Row>
+                  <Icons>
+                    <SocialIconLink>
+                      <Twitter size={35} />
+                    </SocialIconLink>
+                    <SocialIconLink
+                      href="https://www.instagram.com/jh_im_______/"
+                      target="_blank"
+                      aria-label="Instagram"
+                    >
+                      <Instagram size={35} />
+                    </SocialIconLink>
+                    <SocialIconLink
+                      href="https://www.facebook.com/profile.php?id=100004271558231"
+                      target="_blank"
+                      aria-label="Facebook"
+                    >
+                      <Facebook size={35} />
+                    </SocialIconLink>
+                  </Icons>
+                </>
+              )}
             </TextWrapper>
           </RowDiv>
         </DetailWrapper>
@@ -144,47 +201,64 @@ function LocalDetail() {
           <Hr />
         </HeadingWrapper>
         <ContentsWrapper>
-          <StarWrap>
-            <ReactStars
-              {...starsRating}
-              value={starValue}
-              onChange={newValue => setStarValue(newValue)}
-            />
-          </StarWrap>
-          <InputDiv>
-            <OuterSpan>
-              <Input
-                className="inputText"
-                type="text"
-                name="review"
-                required
-                onChange={(e) => setInputValue(e.target.value)}
-                ref={inputRef}
-              />
-              <InnerSpan className="floating-label">
-                Write a review here
-              </InnerSpan>
-            </OuterSpan>
-            <BtnWrap>
-              <Button
-                onClick={(e) => {
-                  console.log("fasefaes")
-                  handleSubmit(e);
-                  inputRef.current.value = "";
-                  // window.location.reload();
-                }}
-              >
-                Submit
-              </Button>
-            </BtnWrap>
-          </InputDiv>
+          {currentUser.username !== user.username && (
+            <>
+              <StarWrap>
+                <ReactStars
+                  {...starsRating}
+                  key={starKeyForce}
+                  value={starValue}
+                  onChange={(newValue) => {
+                    setStarValue(newValue);
+                  }}
+                />
+              </StarWrap>
+              <InputDiv>
+                <OuterSpan>
+                  <Input
+                    className="inputText"
+                    type="text"
+                    name="review"
+                    required
+                    onChange={(e) => setInputValue(e.target.value)}
+                    ref={inputRef}
+                  />
+                  <InnerSpan className="floating-label">
+                    Write a review here
+                  </InnerSpan>
+                </OuterSpan>
+                <BtnWrap>
+                  <Button
+                    onClick={(e) => {
+                      console.log("fasefaes");
+                      handleSubmit(e);
+                      inputRef.current.value = "";
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </BtnWrap>
+              </InputDiv>
+            </>
+          )}
           <ReviewContainer>
-            {user.rating?.map((review, index) => {
+            {sortedReviews?.map((review, index) => {
               return (
                 <ReviewWrapper key={index}>
-                  <ReactStars {...RatedStar} value={review.rate} />
+                  <ReactStars
+                    key={`star-${index}-${starKeyForce}`}
+                    {...RatedStar}
+                    value={review.rate}
+                  />
                   <Reviewer>
-                    Kelly{" "}
+                    <ReviewedBy
+                      onClick={() => {
+                        setReload(true);
+                      }}
+                      to={`/local/${findUser(review.by)}`}
+                    >
+                      {review.by}
+                    </ReviewedBy>
                     <VerifiedSpan>
                       <AiOutlineCheck
                         size={20}
@@ -205,6 +279,43 @@ function LocalDetail() {
     </>
   );
 }
+
+const ReviewedBy = styled(Link)`
+transition: all 0.2s ease-in-out;
+
+&:hover {
+  transform: scale(1.2);
+}
+
+  &:visited {
+    color: #051747;
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+`;
+
+const UnavailableWrap = styled.div`
+  display: flex;
+  margin-top: 50px;
+  opacity: 0.7;
+  color: red;
+`;
+
+const Unavailable = styled.p`
+  font-size: 1.1rem;
+  font-weight: 600;
+`;
+
+const RatingWrap = styled.div`
+  display: flex;
+  margin-bottom: 15px;
+`;
+
+const Rate = styled.p`
+  font-size: 1rem;
+`;
 
 const RowDiv = styled.div`
   position: relative;
@@ -263,19 +374,20 @@ const VerifiedSpan = styled.span`
 
 const SingleReview = styled.p``;
 
-const Reviewer = styled.p`
+const Reviewer = styled.div`
   display: flex;
   align-items: center;
   font-size: 1.1rem;
   font-weight: 600;
   margin: 15px 0;
+  color: #051747;
 `;
 
 const ReviewWrapper = styled.div`
   width: 55vw;
   margin: 0 0 10px 0;
   border: 1px solid RGBA(5, 23, 71, 0.2);
-  padding: 20px 0 20px 20px;
+  padding: 20px;
 `;
 
 const ReviewContainer = styled.div`
@@ -563,6 +675,7 @@ const Img = styled.img`
   width: 400px;
   position: relative;
   z-index: 2;
+  opacity: ${({ isAvailable }) => (isAvailable === false ? "0.5" : "1")};
 
   @media screen and (max-width: 825px) {
     width: 300px;

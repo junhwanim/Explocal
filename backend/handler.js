@@ -12,13 +12,13 @@ const getDestinations = async (req, res) => {
   const client = await new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("explocal");
-  console.log("connected");
+  //console.log("connected");
   const destinations = await db
     .collection("destination")
     .find()
     .sort({ country: 1, cities: 1 })
     .toArray();
-  console.log(destinations);
+  //console.log(destinations);
   res
     .status(200)
     .json({ status: 200, message: "it works", data: destinations });
@@ -29,9 +29,9 @@ const getAllUsers = async (req, res) => {
   const client = await new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("explocal");
-  console.log("connected");
+  //console.log("connected");
   const users = await db.collection("users").find().toArray();
-  console.log(users);
+  //console.log(users);
   res.status(200).json({ status: 200, message: "it works", data: users });
   client.close();
 };
@@ -53,7 +53,7 @@ const getOneUser = async (req, res) => {
 const addReview = async (req, res) => {
   try {
     const { id } = req.params;
-    const { rateNum, rateReview } = req.body;
+    const { rateNum, rateReview, reviewer } = req.body;
     const client = await new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("explocal");
@@ -62,14 +62,15 @@ const addReview = async (req, res) => {
       {
         $push: {
           rating: {
-            $each: [{
-            rate: rateNum,
-            review: rateReview,
-            timeStamp: moment().format("lll"),
-          }],
-          $position: 0
+            $each: [
+              {
+                rate: rateNum,
+                review: rateReview,
+                timeStamp: moment().format("lll"),
+                by: reviewer,
+              },
+            ],
           },
-          
         },
       }
     );
@@ -83,4 +84,12 @@ const addReview = async (req, res) => {
   }
 };
 
-module.exports = { getDestinations, getAllUsers, getOneUser, addReview };
+const createUser = async (req,res) => {
+  const {  } = req.body;
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("explocal");
+
+}
+
+module.exports = { getDestinations, getAllUsers, getOneUser, addReview, createUser };

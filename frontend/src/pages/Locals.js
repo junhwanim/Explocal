@@ -11,7 +11,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import { Link } from "react-router-dom";
 
 function Locals() {
-  const { allUsers } = useContext(DataContext);
+  const { allUsers, currentUser, setActive } = useContext(DataContext);
   const [cityUsers, setCityUsers] = useState([]);
   let { city } = useParams();
 
@@ -39,7 +39,7 @@ function Locals() {
           <LocalsWrapper>
             {cityUsers.map((user) => {
               return (
-                <Local to={`/local/${user._id}`} key={user._id}>
+                <Local onClick={()=>setActive("signin")} to={currentUser?`/local/${user._id}` : `/signin`} key={user._id}>
                   <ImgWrapper>
                     <UserImg src={user.avatarSrc} />
                   </ImgWrapper>
@@ -49,7 +49,7 @@ function Locals() {
                     <City>Living near or in {user.city}</City>
                     <ProfileIcon size={20} />
                     <Bio>{user.bio.split(" ").slice(0, 4).join(" ")}...</Bio>
-                    <Detail>View {user.name}'s profile</Detail>
+                    <Detail>View {currentUser.name === user.name? "my profile" : `${user.name}'s profile`}</Detail>
                   </TextWrapper>
                 </Local>
               );

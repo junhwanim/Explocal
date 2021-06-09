@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Video from "../../videos/video.mp4";
 import { MdKeyboardArrowRight, MdArrowForward } from "react-icons/md";
-import { Link } from "react-scroll";
+import { Link } from "react-router-dom";
+import { DataContext } from "../DataContext";
 
 function HomeSection() {
+  const { currentUser, setActive } = useContext(DataContext);
   const [hover, setHover] = useState(false);
 
   const onHover = () => {
@@ -18,20 +20,21 @@ function HomeSection() {
       </SectionBg>
       <SectionContent>
         <SectionH1>Make local friends and travel with them</SectionH1>
-        <SectionP>
-          Sign up for meeting our awesome local guides.
-        </SectionP>
-        <SectionBtnWrapper>
-          <Button
-            to="signin"
-            onMouseEnter={onHover}
-            onMouseLeave={onHover}
-            primary="true"
-            dark="true"
-          >
-            Sign Up {hover ? <ArrowForward /> : <ArrowRight />}
-          </Button>
-        </SectionBtnWrapper>
+        <SectionP>Sign up for meeting our awesome local guides.</SectionP>
+        {!currentUser && (
+          <SectionBtnWrapper>
+            <Button
+              to="signin"
+              onMouseEnter={onHover}
+              onMouseLeave={onHover}
+              primary="true"
+              dark="true"
+              onClick={(()=>setActive("signup"))}
+            >
+              Sign Up {hover ? <ArrowForward /> : <ArrowRight />}
+            </Button>
+          </SectionBtnWrapper>
+        )}
       </SectionContent>
     </SectionContainer>
   );
@@ -128,10 +131,19 @@ const SectionBtnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all 0.3 ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 
 const Button = styled(Link)`
-  border-radius: 50px;
+  border-radius: 5px;
   background: ${({ primary }) => (primary ? "#cbb162" : "010606")};
   white-space: nowrap;
   padding: ${({ big }) => (big ? "14px 48px" : "12px 30px")};
@@ -139,14 +151,18 @@ const Button = styled(Link)`
   font-size: ${({ fontBig }) => (fontBig ? "20px" : "16px")};
   outline: none;
   border: none;
+  text-decoration: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.2s ease-in-out;
 
+  &:visited {
+    color: inherit;
+  }
+
   &:hover {
-    transition: all 0.2s ease-in-out;
     background: ${({ primary }) => (primary ? "#fff" : "#c7ab59")};
   }
 `;

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import SecondNavbar from "../components/SecondNavbar";
 import ScrollToTop from "../components/ScrollToTop";
@@ -6,17 +6,18 @@ import Footer from "../components/Footer";
 import LoginSVG from "../images/login.svg";
 import SigninForm from "../components/SigninForm";
 import SignupForm from "../components/SignupForm";
+import { DataContext } from "../components/DataContext";
 
 function Signin() {
-    const [active, setActive]= useState("signin")
+  const { active, setActive } = useContext(DataContext);
 
-    const switchToSignup = () => {
-        setActive("signup")
-    }
+  const switchToSignup = () => {
+    setActive("signup");
+  };
 
-    const switchToSignin = () => {
-        setActive("signin")
-    }
+  const switchToSignin = () => {
+    setActive("signin");
+  };
 
   return (
     <>
@@ -24,14 +25,34 @@ function Signin() {
       <SecondNavbar />
       <SigninContainer>
         <SigninWrapper>
-          <AnimationSignin active={active} onClick={switchToSignin}>Signin</AnimationSignin>
-          <AnimationSignup active={active} onClick={switchToSignup}>Signup</AnimationSignup>
+          <AnimationSignin active={active} onClick={switchToSignin}>
+            Signin
+          </AnimationSignin>
+          <AnimationSignup active={active} onClick={switchToSignup}>
+            Signup
+          </AnimationSignup>
           {active === "signin" && <Heading>Signin</Heading>}
           {active === "signup" && <Heading>Signup</Heading>}
           <Img src={LoginSVG} />
           <InnerWrapper>
             {active === "signin" && <SigninForm />}
-            {active === "signup" && <SignupForm/>}
+            {active === "signup" && <SignupForm />}
+            {active === "signin" && (
+              <ConvertPage>
+                Don't have an account?{" "}
+                <Anchor onClick={switchToSignup} href="#">
+                  Signup
+                </Anchor>
+              </ConvertPage>
+            )}
+            {active === "signup" && (
+              <ConvertPage>
+                Already have an account?{" "}
+                <Anchor onClick={switchToSignin} href="#">
+                  Signin
+                </Anchor>
+              </ConvertPage>
+            )}
           </InnerWrapper>
         </SigninWrapper>
       </SigninContainer>
@@ -39,9 +60,36 @@ function Signin() {
     </>
   );
 }
+const Anchor = styled.a`
+  color: #cbb162;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-left: 5px;
+  color: RGBA(5, 23, 71, 1);
+
+  &:visited {
+    color: RGBA(5, 23, 71, 1);
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: #cbb162;
+  }
+`;
+
+const ConvertPage = styled.p`
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+  display: none;
+
+  @media screen and (max-width: 825px) {
+    display: block;
+  } ;
+`;
 
 const AnimationSignin = styled.div`
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
   display: flex;
   align-items: center;
   position: absolute;
@@ -56,17 +104,21 @@ const AnimationSignin = styled.div`
   color: #051747;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  opacity: ${({active})=> active === "signin" ? "0" : "1"};
+  opacity: ${({ active }) => (active === "signin" ? "0" : "1")};
 
   &:hover {
-    height: ${({active})=> active === "signin"? "560px" : "670px"};
+    height: ${({ active }) => active === "signup" && "720px"};
     background-color: RGBA(203, 177, 98, 1);
+  }
+
+  @media screen and (max-width: 825px) {
+    display: none;
   }
 `;
 
 const AnimationSignup = styled.div`
   color: #051747;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -77,19 +129,27 @@ const AnimationSignup = styled.div`
   top: 70px;
   right: -100px;
   padding: 20px;
-  opacity: ${({active})=> active === "signup" ? "0" : "1"};
+  opacity: ${({ active }) => (active === "signup" ? "0" : "1")};
   background-color: RGBA(203, 177, 98, 0.4);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   cursor: pointer;
 
   &:hover {
-    height: ${({active})=> active === "signin"? "560px" : "670px"};
+    height: ${({ active }) => active === "signin" && "560px"};
     background-color: RGBA(203, 177, 98, 1);
+  }
+
+  @media screen and (max-width: 825px) {
+    display: none;
   }
 `;
 
-const InnerWrapper = styled.div``;
+const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Heading = styled.h2`
   margin-top: 20px;

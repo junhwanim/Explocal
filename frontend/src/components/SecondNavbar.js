@@ -1,25 +1,109 @@
-import React from 'react'
-import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { FaSuitcase } from "react-icons/fa";
 import { animateScroll as scroll } from "react-scroll";
+import { DataContext } from "../components/DataContext";
 
 function SecondNavbar() {
-    const toggleHome = () => {
-        scroll.scrollToTop();
-      };
+  const { currentUser, setCurrentUser, setActive } = useContext(DataContext);
 
-    let path = window.location.pathname
+  const toggleHome = () => {
+    scroll.scrollToTop();
+  };
 
-    return (
-        <NavbarContainer path={path}>
-            <NavLogo to="/" onClick={toggleHome}>
-              <LogoIcon style={{ marginRight: "7px", fontSize: "2rem"  }} />
-              Explocal
-            </NavLogo>
-        </NavbarContainer>
-    )
+  let path = window.location.pathname;
+
+  return (
+    <NavbarContainer path={path}>
+      <NavLogo to="/" onClick={toggleHome}>
+        <LogoIcon style={{ marginRight: "7px", fontSize: "2rem" }} />
+        Explocal
+      </NavLogo>
+      {currentUser ? (
+        <CurrentUser>
+          <Greeting>Welcome, {currentUser.name}</Greeting>
+          <NavBtn>
+            <NavBtnClick
+              onClick={() => {
+                localStorage.clear();
+                setCurrentUser("");
+              }}
+              to={path.includes("/local/") ? "/" : "#"}
+            >
+              Sign out
+            </NavBtnClick>
+          </NavBtn>
+        </CurrentUser>
+      ) : (
+        <NavBtn>
+          <NavBtnLink to="/signin" onClick={() => setActive("signin")}>
+            Sign In
+          </NavBtnLink>
+        </NavBtn>
+      )}
+    </NavbarContainer>
+  );
 }
+
+const Greeting = styled.p`
+  color: #fff;
+`;
+
+const CurrentUser = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const NavBtnLink = styled(Link)`
+  border-radius: 5px;
+  background: transparent;
+  white-space: nowrap;
+  padding: 10px 22px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background: #cbb162;
+    color: #000000;
+  }
+`;
+
+const NavBtnClick = styled(Link)`
+  border-radius: 5px;
+  background: transparent;
+  white-space: nowrap;
+  padding: 10px 22px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+
+  &:hover {
+    background: #cbb162;
+    color: #000000;
+  }
+`;
+
+const NavBtn = styled.nav`
+  display: flex;
+  align-items: center;
+  transition: all 0.3 ease-in-out;
+
+  &:active {
+    transform: scale(0.9);
+  }
+`;
 
 const NavbarContainer = styled.div`
   display: flex;
@@ -27,13 +111,13 @@ const NavbarContainer = styled.div`
   height: 80px;
   z-index: 1;
   width: 100%;
-  padding: 0 24px;
+  padding: 0 48px 0 48px;
   max-width: 100vw;
-  background-color: ${({path})=>path.includes("/local/")? "transparent" : "#051747" };
+  background-color: ${({ path }) =>
+    path.includes("/local/") ? "transparent" : "#051747"};
 `;
 
-const LogoIcon = styled(FaSuitcase)`
-`;
+const LogoIcon = styled(FaSuitcase)``;
 
 const NavLogo = styled(Link)`
   color: #fff;
@@ -54,4 +138,4 @@ const NavLogo = styled(Link)`
   }
 `;
 
-export default SecondNavbar
+export default SecondNavbar;

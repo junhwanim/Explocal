@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import styled from "styled-components";
 
 function SignupForm() {
@@ -17,19 +16,35 @@ function SignupForm() {
         </OuterSpan>
       </InputDiv>
       <Row>
-      <InputDiv>
-        <OuterSpan>
-          <SmallInput className="inputText" type="text" name="country" required />
-          <InnerSpan className="floating-label">Country</InnerSpan>
-        </OuterSpan>
-      </InputDiv>
-      <InputDiv>
-        <OuterSpan>
-          <SmallInput className="inputText" type="text" name="city" required />
-          <InnerSpan className="floating-label">City</InnerSpan>
-        </OuterSpan>
-      </InputDiv>
+        <InputDiv>
+          <OuterSpan>
+            <SmallInput
+              className="inputText"
+              type="text"
+              name="country"
+              required
+            />
+            <InnerSpan className="floating-label">Country</InnerSpan>
+          </OuterSpan>
+        </InputDiv>
+        <InputDiv>
+          <OuterSpan>
+            <SmallInput
+              className="inputText"
+              type="text"
+              name="city"
+              required
+            />
+            <InnerSpan className="floating-label">City</InnerSpan>
+          </OuterSpan>
+        </InputDiv>
       </Row>
+      <InputDiv>
+        <OuterSpan>
+          <Textarea className="inputText" type="text" name="bio" required />
+          <InnerSpan className="floating-label">Biography</InnerSpan>
+        </OuterSpan>
+      </InputDiv>
       <InputDiv>
         <OuterSpan>
           <Input className="inputText" type="text" name="username" required />
@@ -38,13 +53,13 @@ function SignupForm() {
       </InputDiv>
       <InputDiv>
         <OuterSpan>
-          <Input className="inputText" type="text" name="password" required />
+          <Input style={{letterSpacing: "4px"}} className="inputText" type="password" name="password" required />
           <InnerSpan className="floating-label">Password</InnerSpan>
         </OuterSpan>
       </InputDiv>
       <InputDiv>
         <OuterSpan>
-          <Input className="inputText" type="text" name="password2" required />
+          <Input style={{letterSpacing: "4px"}} className="inputText" type="password" name="password2" required />
           <InnerSpan className="floating-label">
             Confirm your password
           </InnerSpan>
@@ -53,45 +68,18 @@ function SignupForm() {
       <BtnWrap>
         <Btn>Signup</Btn>
       </BtnWrap>
-      {window.innerWidth < 825 &&
-      <ConvertPage>
-        Already have an account? <Anchor href="#">Signin</Anchor>
-      </ConvertPage>}
     </SignupFormContainer>
   );
 }
 
 const Row = styled.div`
-display: flex;
-justify-content: space-between;
-width: 350px;
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
 
-@media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     width: 280px;
-}
-`;
-
-const Anchor = styled.a`
-  color: #cbb162;
-  text-decoration: none;
-  font-size: 1rem;
-  margin-left: 5px;
-  color: RGBA(5, 23, 71, 1);
-
-  &:visited {
-    color: RGBA(5, 23, 71, 1);
   }
-
-  &:hover {
-    cursor: pointer;
-    color: #cbb162;
-  }
-`;
-
-const ConvertPage = styled.p`
-  margin-top: 30px;
-  font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.5);
 `;
 
 const Btn = styled.button`
@@ -122,7 +110,7 @@ const BtnWrap = styled.div`
 `;
 
 const SmallInput = styled.input`
-font-size: 14px;
+  font-size: 14px;
   width: 170px;
   height: 40px;
   outline: none;
@@ -140,6 +128,28 @@ font-size: 14px;
 
   @media screen and (max-width: 600px) {
     width: 135px;
+  }
+`;
+
+const Textarea= styled.textarea`
+font-size: 14px;
+  width: 350px;
+  height: 60px;
+  outline: none;
+  border: none;
+  box-shadow: RGBA(5, 23, 71, 0.5) 0px 0px 3px 0px;
+  border-radius: 5px;
+
+  &:focus ~ .floating-label,
+  &:not(:focus):valid ~ .floating-label {
+    top: -1px;
+  }
+  &:focus {
+    border-bottom: 2px solid #051747;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 280px;
   }
 `;
 
