@@ -8,6 +8,7 @@ import { DataContext } from "../components/DataContext";
 function SecondNavbar() {
   const { currentUser, setCurrentUser, setActive } = useContext(DataContext);
 
+
   const toggleHome = () => {
     scroll.scrollToTop();
   };
@@ -22,20 +23,21 @@ function SecondNavbar() {
       </NavLogo>
       {currentUser ? (
         <CurrentUser>
-          <Greeting>Welcome, {currentUser.name}</Greeting>
+          <Greeting to="/user/profile">Welcome, {currentUser.name}</Greeting>
           <NavBtn>
             <NavBtnClick
               onClick={() => {
                 localStorage.clear();
                 setCurrentUser("");
               }}
-              to={path.includes("/local/") ? "/" : "#"}
+              to="/signin"
             >
               Sign out
             </NavBtnClick>
           </NavBtn>
         </CurrentUser>
       ) : (
+        path !== "/signin" &&
         <NavBtn>
           <NavBtnLink to="/signin" onClick={() => setActive("signin")}>
             Sign In
@@ -46,14 +48,27 @@ function SecondNavbar() {
   );
 }
 
-const Greeting = styled.p`
+const Greeting = styled(Link)`
   color: #fff;
+  margin-bottom: 8px;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: #cbb162;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
 `;
 
 const CurrentUser = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 const NavBtnLink = styled(Link)`

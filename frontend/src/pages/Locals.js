@@ -9,9 +9,11 @@ import { ImProfile } from "react-icons/im";
 import { RiUserLocationFill } from "react-icons/ri";
 import ScrollToTop from "../components/ScrollToTop";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Locals() {
-  const { allUsers, currentUser, setActive } = useContext(DataContext);
+  const { allUsers, currentUser, setActive, pageTransition, pageVariants } =
+    useContext(DataContext);
   const [cityUsers, setCityUsers] = useState([]);
   let { city } = useParams();
 
@@ -27,6 +29,14 @@ function Locals() {
   return (
     <>
       <ScrollToTop />
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        transition={pageTransition}
+        style={{position: "absolute", width: "100vw"}}
+      >
       <SecondNavbar />
       <LocalsConatiner>
         <SecondSelects />
@@ -39,7 +49,11 @@ function Locals() {
           <LocalsWrapper>
             {cityUsers.map((user) => {
               return (
-                <Local onClick={()=>setActive("signin")} to={currentUser?`/local/${user._id}` : `/signin`} key={user._id}>
+                <Local
+                  onClick={() => setActive("signin")}
+                  to={currentUser ? `/local/${user._id}` : `/signin`}
+                  key={user._id}
+                >
                   <ImgWrapper>
                     <UserImg src={user.avatarSrc} />
                   </ImgWrapper>
@@ -49,7 +63,12 @@ function Locals() {
                     <City>Living near or in {user.city}</City>
                     <ProfileIcon size={20} />
                     <Bio>{user.bio.split(" ").slice(0, 4).join(" ")}...</Bio>
-                    <Detail>View {currentUser.name === user.name? "my profile" : `${user.name}'s profile`}</Detail>
+                    <Detail>
+                      View{" "}
+                      {currentUser?.name === user.name
+                        ? "my profile"
+                        : `${user.name}'s profile`}
+                    </Detail>
                   </TextWrapper>
                 </Local>
               );
@@ -58,16 +77,17 @@ function Locals() {
         </Wrapper>
       </LocalsConatiner>
       <Footer />
+      </motion.div>
     </>
   );
 }
 
 const ProfileIcon = styled(ImProfile)`
-fill: #081f62;
+  fill: #081f62;
 `;
 
 const LocationIcon = styled(RiUserLocationFill)`
-fill: #081f62;
+  fill: #081f62;
 `;
 
 const Detail = styled.div`
@@ -77,8 +97,8 @@ const Detail = styled.div`
   font-size: 30px;
   display: none;
 
-  @media screen and (max-width: 600px){
-      font-size: 22px;
+  @media screen and (max-width: 600px) {
+    font-size: 22px;
   }
 `;
 
@@ -158,7 +178,7 @@ const Local = styled(Link)`
   }
 
   &:active {
-    transform: scale(.98)
+    transform: scale(0.98);
   }
 
   &:hover {

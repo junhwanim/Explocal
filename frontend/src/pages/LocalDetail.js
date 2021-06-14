@@ -17,6 +17,8 @@ import {
   FaFacebookSquare,
 } from "react-icons/fa";
 import ScrollToTop from "../components/ScrollToTop";
+import { animateScroll as scroll } from "react-scroll";
+import { motion } from "framer-motion";
 
 const starsRating = {
   size: 30,
@@ -48,10 +50,38 @@ function LocalDetail() {
   const [starValue, setStarValue] = useState(null);
   const [reload, setReload] = useState(true);
   const [starKeyForce, setStarKeyForce] = useState(0);
-  const { currentUser, allUsers } = useContext(DataContext);
+  const { currentUser, allUsers} = useContext(DataContext);
   const { id } = useParams();
   const history = useHistory();
   const inputRef = useRef(null);
+
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      y: "-100vw",
+      scale: 0.5
+    },
+    in: {
+      opacity: 1,
+      y: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      y: "100vw",
+      scale: 1.5
+    },
+  }
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 1
+  };
+
+  const animatedScroll = () => {
+    scroll.scrollToTop();
+  };
 
   useEffect(() => {
     setStarKeyForce((prev) => prev + 1);
@@ -100,7 +130,9 @@ function LocalDetail() {
     return num.rate;
   });
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  const addedNumber = getNumbers?.reduce(reducer) / user.rating?.length;
+  const addedNumber =
+    user.rating?.length > 0 &&
+    getNumbers?.reduce(reducer) / user.rating?.length;
 
   const sortedReviews = user.rating?.sort((a, b) => {
     const d1 = Date.parse(a.timeStamp);
@@ -119,6 +151,14 @@ function LocalDetail() {
   return (
     <>
       <ScrollToTop />
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        transition={pageTransition}
+        style={{position: "absolute", width: "100vw"}}
+      >
       <Background></Background>
       <SecondNavbar style={{ width: "100%" }} />
       <DetailContainer>
@@ -146,8 +186,8 @@ function LocalDetail() {
                 </IconWrapper>
                 <Rate>
                   {Number.isInteger(addedNumber)
-                    ? addedNumber.toFixed(0)
-                    : addedNumber.toFixed(1)}{" "}
+                    ? Number(addedNumber).toFixed(0)
+                    : Number(addedNumber).toFixed(1)}{" "}
                   / 5{" "}
                   <span style={{ marginLeft: "15px" }}>
                     ({user.rating?.length}{" "}
@@ -156,7 +196,7 @@ function LocalDetail() {
                 </Rate>
               </RatingWrap>
               <Bio>{user.bio}</Bio>
-              {user.local === false ? (
+              {user.local === "false" ? (
                 <UnavailableWrap>
                   <CgUnavailable size={20} style={{ marginRight: "5px" }} />
                   <Unavailable>Unavailable for the moment</Unavailable>
@@ -254,6 +294,7 @@ function LocalDetail() {
                     <ReviewedBy
                       onClick={() => {
                         setReload(true);
+                        animatedScroll();
                       }}
                       to={`/local/${findUser(review.by)}`}
                     >
@@ -276,16 +317,17 @@ function LocalDetail() {
         </ContentsWrapper>
       </RateWrapper>
       <Footer />
+      </motion.div>
     </>
   );
 }
 
 const ReviewedBy = styled(Link)`
-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
-&:hover {
-  transform: scale(1.2);
-}
+  &:hover {
+    transform: scale(1.2);
+  }
 
   &:visited {
     color: #051747;
@@ -439,6 +481,7 @@ const Input = styled.textarea`
   width: 55vw;
   border: none;
   box-shadow: inset 0 0 5px #051747;
+  padding: 10px;
 
   &:focus ~ .floating-label,
   &:not(:focus):valid ~ .floating-label {
@@ -675,7 +718,7 @@ const Img = styled.img`
   width: 400px;
   position: relative;
   z-index: 2;
-  opacity: ${({ isAvailable }) => (isAvailable === false ? "0.5" : "1")};
+  opacity: ${({ isAvailable }) => (isAvailable === "false" ? "0.5" : "1")};
 
   @media screen and (max-width: 825px) {
     width: 300px;

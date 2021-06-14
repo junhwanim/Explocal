@@ -7,9 +7,16 @@ import LoginSVG from "../images/login.svg";
 import SigninForm from "../components/SigninForm";
 import SignupForm from "../components/SignupForm";
 import { DataContext } from "../components/DataContext";
+import { animateScroll as scroll } from "react-scroll";
+import { motion } from "framer-motion";
 
 function Signin() {
-  const { active, setActive } = useContext(DataContext);
+  const { active, setActive, setReload, pageTransition, pageVariants } =
+    useContext(DataContext);
+
+  const animatedScroll = () => {
+    scroll.scrollToTop();
+  };
 
   const switchToSignup = () => {
     setActive("signup");
@@ -20,12 +27,25 @@ function Signin() {
   };
 
   return (
-    <>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+      style={{position: "absolute", width: "100vw"}}
+    >
       <ScrollToTop />
       <SecondNavbar />
       <SigninContainer>
         <SigninWrapper>
-          <AnimationSignin active={active} onClick={switchToSignin}>
+          <AnimationSignin
+            active={active}
+            onClick={() => {
+              switchToSignin();
+              setReload(true);
+            }}
+          >
             Signin
           </AnimationSignin>
           <AnimationSignup active={active} onClick={switchToSignup}>
@@ -40,7 +60,13 @@ function Signin() {
             {active === "signin" && (
               <ConvertPage>
                 Don't have an account?{" "}
-                <Anchor onClick={switchToSignup} href="#">
+                <Anchor
+                  onClick={() => {
+                    switchToSignup();
+                    animatedScroll();
+                  }}
+                  href="#"
+                >
                   Signup
                 </Anchor>
               </ConvertPage>
@@ -48,7 +74,13 @@ function Signin() {
             {active === "signup" && (
               <ConvertPage>
                 Already have an account?{" "}
-                <Anchor onClick={switchToSignin} href="#">
+                <Anchor
+                  onClick={() => {
+                    switchToSignin();
+                    animatedScroll();
+                  }}
+                  href="#"
+                >
                   Signin
                 </Anchor>
               </ConvertPage>
@@ -57,7 +89,7 @@ function Signin() {
         </SigninWrapper>
       </SigninContainer>
       <Footer />
-    </>
+    </motion.div>
   );
 }
 const Anchor = styled.a`
@@ -107,7 +139,7 @@ const AnimationSignin = styled.div`
   opacity: ${({ active }) => (active === "signin" ? "0" : "1")};
 
   &:hover {
-    height: ${({ active }) => active === "signup" && "720px"};
+    height: ${({ active }) => active === "signup" && "500px"};
     background-color: RGBA(203, 177, 98, 1);
   }
 
@@ -136,7 +168,7 @@ const AnimationSignup = styled.div`
   cursor: pointer;
 
   &:hover {
-    height: ${({ active }) => active === "signin" && "560px"};
+    height: ${({ active }) => active === "signin" && "500px"};
     background-color: RGBA(203, 177, 98, 1);
   }
 

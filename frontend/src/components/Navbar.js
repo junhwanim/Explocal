@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { FaBars, FaSuitcase} from "react-icons/fa";
+import { FaBars, FaSuitcase } from "react-icons/fa";
 import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
 import { Link as LinkS } from "react-scroll";
@@ -8,7 +8,7 @@ import { animateScroll as scroll } from "react-scroll";
 import { DataContext } from "../components/DataContext";
 
 function Navbar({ toggle }) {
-  const { currentUser, setCurrentUser, setActive} = useContext(DataContext);
+  const { currentUser, setCurrentUser, setActive } = useContext(DataContext);
   const [scrollNav, setScrollNav] = useState(false);
 
   const changeNav = () => {
@@ -80,13 +80,14 @@ function Navbar({ toggle }) {
               </NavMenu>
               {currentUser ? (
                 <CurrentUser>
-                  <Greeting>Welcome, {currentUser.name}</Greeting>
+                  <Greeting to="/user/profile">Welcome, {currentUser.name}</Greeting>
                   <NavBtn>
                     <NavBtnClick
                       onClick={() => {
                         localStorage.clear();
                         setCurrentUser("");
                       }}
+                      to="/signin"
                     >
                       Sign out
                     </NavBtnClick>
@@ -94,7 +95,9 @@ function Navbar({ toggle }) {
                 </CurrentUser>
               ) : (
                 <NavBtn>
-                  <NavBtnLink to="/signin" onClick={()=>setActive("signin")}>Sign In</NavBtnLink>
+                  <NavBtnLink to="/signin" onClick={() => setActive("signin")}>
+                    Sign In
+                  </NavBtnLink>
                 </NavBtn>
               )}
             </AlignToRight>
@@ -105,14 +108,30 @@ function Navbar({ toggle }) {
   );
 }
 
-const Greeting = styled.p`
+const Greeting = styled(LinkR)`
   color: #fff;
+  margin-bottom: 8px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: #cbb162;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+
+  @media screen and (max-width:825px){
+    margin-right: 30px;
+  }
 `;
 
 const CurrentUser = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 const Nav = styled.nav`
@@ -230,7 +249,7 @@ const NavBtn = styled.nav`
   }
 `;
 
-const NavBtnClick = styled.button`
+const NavBtnClick = styled(LinkR)`
   border-radius: 5px;
   background: #cbb162;
   white-space: nowrap;

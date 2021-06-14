@@ -7,20 +7,22 @@ function SigninForm() {
   const { allUsers, setCurrentUser } = useContext(DataContext);
   const [inputUsername, setInputUsername] = useState("");
   const [inputPassword, setInputPassword] = useState("");
-  const [authFailed, setAuthFailed] = useState("");
+  const [authFailed, setAuthFailed] = useState(false);
   const history = useHistory();
 
   const handlerButton = () => {
     for (let i = 0; i < allUsers.length; i++) {
       if (
         allUsers[i].username.toLowerCase() === inputUsername.toLowerCase() &&
-        allUsers[i].password === Number(inputPassword)
+        allUsers[i].password === inputPassword
       ) {
+        setAuthFailed(false);
         localStorage.setItem("currentUser", JSON.stringify(allUsers[i]));
         setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
         history.push("/");
+        break;
       } else {
-        setAuthFailed("Username or Password incorrect");
+        setAuthFailed(true);
       }
     }
   };
@@ -36,7 +38,7 @@ function SigninForm() {
             required
             onChange={(e) => {
               setInputUsername(e.target.value);
-              setAuthFailed("");
+              setAuthFailed(false);
             }}
           />
           <InnerSpan className="floating-label">Username</InnerSpan>
@@ -51,17 +53,27 @@ function SigninForm() {
             required
             onChange={(e) => {
               setInputPassword(e.target.value);
-              setAuthFailed("");
+              setAuthFailed(false);
             }}
-            style={{letterSpacing: "4px"}}
+            style={{ letterSpacing: "4px" }}
           />
           <InnerSpan className="floating-label">Password</InnerSpan>
         </OuterSpan>
       </InputDiv>
       <FindPassword>Forgot your password?</FindPassword>
-      <ErrorMessage authFailed={authFailed}>{authFailed}</ErrorMessage>
+      {authFailed === true ? (
+        <ErrorMessage>Username or Password incorrect</ErrorMessage>
+      ) : (
+        ""
+      )}
       <BtnWrap>
-        <Btn onClick={handlerButton}>Signin</Btn>
+        <Btn
+          onClick={() => {
+            handlerButton();
+          }}
+        >
+          Signin
+        </Btn>
       </BtnWrap>
     </SigninFormContainer>
   );
@@ -70,7 +82,6 @@ function SigninForm() {
 const ErrorMessage = styled.p`
   color: red;
   margin-top: 10px;
-  visibility: ${({ authFailed }) => (authFailed ? "visible" : "hidden")};
 `;
 
 const Btn = styled.button`
@@ -113,6 +124,7 @@ const Input = styled.input`
   border: none;
   box-shadow: RGBA(5, 23, 71, 0.5) 0px 0px 3px 0px;
   border-radius: 5px;
+  padding: 10px;
 
   &:focus ~ .floating-label,
   &:not(:focus):valid ~ .floating-label {

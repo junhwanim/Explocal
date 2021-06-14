@@ -24,8 +24,8 @@ function Footer() {
               Explocal
             </SocialLogo>
             <CopyRight>
-              <FaSuitcase style={{ marginRight: "7px" }} />
-              Explocal © {new Date().getFullYear()}
+              
+              Copyright © {new Date().getFullYear()} All Rights Reserved by Explocal.
             </CopyRight>
             <SocialIcons>
               <SocialIconLink
