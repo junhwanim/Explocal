@@ -22,7 +22,7 @@ const getDestinations = async (req, res) => {
   //console.log(destinations);
   res
     .status(200)
-    .json({ status: 200, message: "it works", data: destinations });
+    .json({ status: 200, message: "Success", data: destinations });
   client.close();
 };
 
@@ -33,7 +33,7 @@ const getAllUsers = async (req, res) => {
   //console.log("connected");
   const users = await db.collection("users").find().toArray();
   //console.log(users);
-  res.status(200).json({ status: 200, message: "it works", data: users });
+  res.status(200).json({ status: 200, message: "Success ", data: users });
   client.close();
 };
 
@@ -44,7 +44,7 @@ const getOneUser = async (req, res) => {
     await client.connect();
     const db = client.db("explocal");
     let userId = await db.collection("users").findOne({ _id: id });
-    res.status(200).json({ status: 200, message: "it works", data: userId });
+    res.status(200).json({ status: 200, message: "Success", data: userId });
     client.close();
   } catch {
     res.status(404).json({ satus: 404, message: "no user found" });
