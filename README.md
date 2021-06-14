@@ -32,10 +32,20 @@ Head over to https://localhost:3000 to view the project.
 ## What has been implemented in this project
 
 ### Home
-##### Three different sections with scroll effect by **react-scroll**
+#### Three different sections with scroll effect by **react-scroll**
 - Home section inlcudes : brief explanation about Explocal and link to sign-up page.
 - About section is to introduce Explocal to you.
 - Meet-Guides section is where you can choose your desired destination and see our locals in that specific destination.
 - Contact section is where you can contact Explocal's team about anything.
 
-### 
+### Locals Page
+- A list of locals living in the specific city you chose.
+- React-select implemented to let you change the city and the country within the same page.
+- Link to view local's details.
+
+### Local Details Page
+- Link to go back to Locals Page.
+- View local's details.
+- View local's contact informations.
+- React-star-rating-component implemented to permit review system.
+- Link to view the reviewers profile.
