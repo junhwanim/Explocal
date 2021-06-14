@@ -172,6 +172,7 @@ It will update the information in MongoDB in this form:
   }
 }
 ```
+If the authentications fail, It will show the error accordingly.
 
 
 
