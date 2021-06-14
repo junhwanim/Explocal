@@ -107,3 +107,41 @@ Head over to https://localhost:3000 to view the project.
     "uuidv4": "^6.2.10"
   }
 ```
+---
+## Screenshots
+
+### Home Section
+![Screen Shot 2021-06-14 at 4 14 44 PM](https://user-images.githubusercontent.com/77517752/121954701-0f5e6900-cd2d-11eb-8b6e-85a91704f106.jpg)
+
+### About Section
+![Screen Shot 2021-06-14 at 4 15 10 PM](https://user-images.githubusercontent.com/77517752/121954751-1be2c180-cd2d-11eb-8b34-2f71d524cf51.jpg)
+
+### Meet-Guides Section
+![Screen Shot 2021-06-14 at 4 15 22 PM](https://user-images.githubusercontent.com/77517752/121954792-269d5680-cd2d-11eb-9d6f-1ace31329b26.jpg)
+
+### Contact Section
+![Screen Shot 2021-06-14 at 4 15 37 PM](https://user-images.githubusercontent.com/77517752/121954824-2f8e2800-cd2d-11eb-94c5-87746623be35.jpg)
+
+### Signin Page
+![Screen Shot 2021-06-14 at 4 15 55 PM](https://user-images.githubusercontent.com/77517752/121954857-3ae15380-cd2d-11eb-9707-bb1b5fda9eba.jpg)
+
+### Signup Page
+![Screen Shot 2021-06-14 at 4 16 13 PM](https://user-images.githubusercontent.com/77517752/121954889-446abb80-cd2d-11eb-8d2d-9685475c3833.jpg)
+
+### List of Locals
+![Screen Shot 2021-06-14 at 4 17 17 PM](https://user-images.githubusercontent.com/77517752/121954926-551b3180-cd2d-11eb-9ce9-8734de754f30.jpg)
+
+### Local Page
+![Screen Shot 2021-06-14 at 4 19 45 PM](https://user-images.githubusercontent.com/77517752/121954979-649a7a80-cd2d-11eb-871e-f4a00ac68464.jpg)
+![Screen Shot 2021-06-14 at 4 17 32 PM](https://user-images.githubusercontent.com/77517752/121954994-682e0180-cd2d-11eb-8a1a-e10bc707317b.jpg)
+
+### Local Page - Review Section
+![Screen Shot 2021-06-14 at 4 17 50 PM](https://user-images.githubusercontent.com/77517752/121955048-7714b400-cd2d-11eb-8d27-f6890c766008.jpg)
+
+### Profile Page - Account Section
+![Screen Shot 2021-06-14 at 4 18 04 PM](https://user-images.githubusercontent.com/77517752/121955132-8f84ce80-cd2d-11eb-8473-a13c629997e5.jpg)
+
+### Profile Page - Password Section
+![Screen Shot 2021-06-14 at 4 18 21 PM](https://user-images.githubusercontent.com/77517752/121955171-9b709080-cd2d-11eb-9a0d-b174cd21169e.jpg)
+
+
