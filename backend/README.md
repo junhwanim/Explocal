@@ -119,3 +119,10 @@ Should come in this structure:
   }
 }
 ```
+
+## PATCH /api/user/:id
+
+Once the loggedin-user write a review on another user, this endpoint will update the new review.
+
+<img width="713" alt="Screen Shot 2021-06-14 at 1 38 44 PM" src="https://user-images.githubusercontent.com/77517752/121934979-eaaac700-cd15-11eb-8f72-ea1946b50469.png">
+
