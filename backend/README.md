@@ -126,11 +126,11 @@ Should come in this structure:
 
 Once the loggedin-user write a review on another user, this endpoint will update the new review.
 
-When loggedin-user writes new review like below,
+When loggedin-user writes new review like below:
 
 <img width="100%" alt="Screen Shot 2021-06-14 at 1 44 12 PM" src="https://user-images.githubusercontent.com/77517752/121935611-9fdd7f00-cd16-11eb-83cf-42a8eba04a25.png">
 
-This endpoint will update the given information, time, and name of the loggedin-user like below.
+This endpoint will update the given information, time, and name of the loggedin-user like below:
 
 ```json
 {
@@ -140,5 +140,38 @@ This endpoint will update the given information, time, and name of the loggedin-
   "by": "Current loggedin-user's name"
 }
 ```
+
+## POST /api/user
+
+This endpoint creates new user in the form format. 
+
+Once it receives JSON body from the signup form and passes all authentications like below:
+
+<img width="100%" alt="Screen Shot 2021-06-14 at 2 04 15 PM" src="https://user-images.githubusercontent.com/77517752/121938277-99043b80-cd19-11eb-8a53-64b2b9d5887d.png">
+
+It will update the information in MongoDB in this form:
+
+```json
+{
+  "status": 201,
+  "message": "Updated",
+  "data": {
+    "_id": "ed9c392a-bad7-4fac-b9ef-84831c2bffe9",
+    "country": "Canada",
+    "city": "Montreal",
+    "name": "stefany",
+    "email": "stefany@gmail.com",
+    "username": "stefany",
+    "password": "stefany1234",
+    "bio": "Coffee practitioner. Tv guru. Devoted thinker. Amateur music maven. Web fan. Bacon expert.",
+    "avatarSrc": "https://media-exp3.licdn.com/dms/image/C4E03AQFcchvv3qTcLw/profile-displayphoto-shrink_800_800/0/1619712894123?e=1629331200&v=beta&t=5UdtlXAHjAMC1neTd3vgxt5VvwuZiDydHF0V3eHgymY",
+    "local": "true",
+    "rating": [
+      // No rating since she is a new user
+    ]
+  }
+}
+```
+
 
 
