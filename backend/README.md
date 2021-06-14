@@ -174,5 +174,19 @@ It will update the information in MongoDB in this form:
 ```
 If the authentications fail, It will show the error accordingly.
 
+## PATCH /api/user/account/:id
+
+Once user is loggedin, the user can go to profile page and edit user's information.
+
+
+If the informations pass every authentications, this endpoint will update the information in MongoDB.
+
+<img width="100%" alt="Screen Shot 2021-06-14 at 2 18 43 PM" src="https://user-images.githubusercontent.com/77517752/121940356-00bb8600-cd1c-11eb-8b6b-84dab6705843.png">
+
+If the authentications fail, It will show the error accordingly.
+
+
+
+
 
 
