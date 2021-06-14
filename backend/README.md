@@ -53,3 +53,69 @@ Should come in this structure:
     ]
 }
 ```
+
+## GET /api/users
+
+This endpoint fetches all the users from MongoDB.
+
+Should come in this structure:
+
+```json
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "_id": "ed9c392a-bad7-4fac-b9ef-84831c2bffe9",
+    "country": "Canada",
+    "city": "Vancouver",
+    "name": "Stephanie",
+    "email": "stephanie@google.com",
+    "username": "stephanie",
+    "password": "stephanie1234",
+    "bio": "Beer specialist. Twitter enthusiast. Subtly charming web ninja. Travel fan.",
+    "avatarSrc": "https://media-exp3.licdn.com/dms/image/C5603AQEKmXcAf8v1GA/profile-displayphoto-shrink_800_800/0/1585861785208?e=1628726400&v=beta&t=R6o16TYhc3LTtM64I9M3ReNMwgfp9EFxPBlkO1E49hA",
+    "local": "true",
+    "rating": [
+      {
+        "rate": 5,
+        "review": "Amazing person! I miss drinking beer with her.",
+        "timeStamp": "Jun 9, 2021 11:04 PM",
+        "by": "Mike"
+      }
+    ]
+  }
+}
+```
+
+## GET /api/user/:id
+
+This endpoint fetches a user by user's _id.
+
+Should come in this structure:
+
+```json
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "_id": "ed9c392a-bad7-4fac-b9ef-84831c2bffe9",
+    "country": "Canada",
+    "city": "Vancouver",
+    "name": "Stephanie",
+    "email": "stephanie@google.com",
+    "username": "stephanie",
+    "password": "stephanie1234",
+    "bio": "Beer specialist. Twitter enthusiast. Subtly charming web ninja. Travel fan.",
+    "avatarSrc": "https://media-exp3.licdn.com/dms/image/C5603AQEKmXcAf8v1GA/profile-displayphoto-shrink_800_800/0/1585861785208?e=1628726400&v=beta&t=R6o16TYhc3LTtM64I9M3ReNMwgfp9EFxPBlkO1E49hA",
+    "local": "true",
+    "rating": [
+      {
+        "rate": 5,
+        "review": "Amazing person! I miss drinking beer with her.",
+        "timeStamp": "Jun 9, 2021 11:04 PM",
+        "by": "Mike"
+      }
+    ]
+  }
+}
+```
