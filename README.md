@@ -10,7 +10,8 @@ This is a website for travellers, new-comers or anyone who plan to travel or mak
 
 **Junhwan Im (Jun)**: https://github.com/junhwanim
 
-<img width="100%" alt="Screen Shot 2021-06-14 at 3 14 37 PM" src="https://user-images.githubusercontent.com/77517752/121946959-7b3bd400-cd23-11eb-874f-73bc15576c34.png">
+![Screen Shot 2021-06-14 at 3 14 37 PM](https://user-images.githubusercontent.com/77517752/121947172-be964280-cd23-11eb-9a03-365d8ccb118d.jpg)
+
 
 
 
