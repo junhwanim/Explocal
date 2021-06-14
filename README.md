@@ -43,26 +43,31 @@ Head over to https://localhost:3000 to view the project.
 - React-select implemented to let you change the city and the country within the same page.
 - Link to view local's details.
 
-### Local Details Page
+### Local-Details Page
 - Link to go back to Locals Page.
 - View local's details.
 - View local's contact informations.
 - React-star-rating-component implemented to permit review system.
 - Link to view the reviewers profile.
 
-### Profile page
+### Profile Page
 - View the current user's information.
 - Edit the current user's information.
 - Change password.
 - Placeholders move to Labels on top of the input once input is active.
 
-### Login page
+### Login Page
 - One form of Signup or Signin with animations.
 - When mobile viewport, animated button will disappear and link to Signup or Signin will appear.
 - Solid authentications implemented from backend.
 
-### Page transition
+### Page Transition
 - Framer-motion is used to make smooth trasition between pages.
+
+### Mobile Responsiveness 
+- All pages are mobile-friendly.
+- Hamburger bar is implemented when browser is on mobile-viewport.
+- Sidebar will drop from top of the browser when hamburger bar is clicked.
 
 ## Dependencies used in the front-end:
 ```json
