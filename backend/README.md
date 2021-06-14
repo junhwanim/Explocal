@@ -17,6 +17,7 @@ The server runs on port **8000**, so you can access the server at `http://localh
         "cities":
           ["Montreal","Ottawa","Toronto","Vancouver"]
       }
+      // More destinations...
     ]
 }
 ```
