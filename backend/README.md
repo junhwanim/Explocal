@@ -124,5 +124,19 @@ Should come in this structure:
 
 Once the loggedin-user write a review on another user, this endpoint will update the new review.
 
-<img width="100%" alt="Screen Shot 2021-06-14 at 1 38 44 PM" src="https://user-images.githubusercontent.com/77517752/121934979-eaaac700-cd15-11eb-8f72-ea1946b50469.png">
+When loggedin-user writes new review like below,
+
+<img width="100%" alt="Screen Shot 2021-06-14 at 1 44 12 PM" src="https://user-images.githubusercontent.com/77517752/121935611-9fdd7f00-cd16-11eb-83cf-42a8eba04a25.png">
+
+This endpoint will update the given information, time, and name of the loggedin-user like below.
+
+```json
+{
+  "rate": 4.5,
+  "review": "She is very friendly and brought me to a lot of beautiful places in Montreal.",
+  "TimeStamp": "It shows the time when loggedin-user submits",
+  "by": "Current loggedin-user's name"
+}
+```
+
 
