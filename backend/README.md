@@ -50,6 +50,7 @@ Should come in this structure:
         "cities":
           ["Montreal","Ottawa","Toronto","Vancouver"]
       }
+      // More destinations...
     ]
 }
 ```
@@ -83,6 +84,7 @@ Should come in this structure:
         "by": "Mike"
       }
     ]
+    // More users...
   }
 }
 ```
