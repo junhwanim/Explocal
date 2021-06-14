@@ -84,3 +84,21 @@ Head over to https://localhost:3000 to view the project.
     "web-vitals": "^1.0.1"
   }
 ```
+
+## Dependencies used in the back-end:
+```json
+"dependencies": {
+    "assert": "^2.0.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "file-system": "^2.2.2",
+    "moment": "^2.29.1",
+    "mongodb": "^4.0.0-beta.4",
+    "morgan": "^1.10.0",
+    "node": "^16.1.0",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7",
+    "uuidv4": "^6.2.10"
+  }
+```
