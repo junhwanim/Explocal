@@ -27,6 +27,6 @@ Head over to https://localhost:3000 to view the project.
 
 ## Endpoints
 
-**Endpoints have been documented in [server/README.md](https://github.com/junhwanim/Explocal/blob/main/backend/README.md)**
+**Endpoints have been documented in [backend/README.md](https://github.com/junhwanim/Explocal/blob/main/backend/README.md)**
 
 ## What has been implemented in this project
