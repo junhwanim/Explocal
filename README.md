@@ -49,3 +49,17 @@ Head over to https://localhost:3000 to view the project.
 - View local's contact informations.
 - React-star-rating-component implemented to permit review system.
 - Link to view the reviewers profile.
+
+### Profile page
+- View the current user's information.
+- Edit the current user's information.
+- Change password.
+- Placeholders move to Labels on top of the input once input is active.
+
+### Login page
+- One form of Signup or Signin with animations.
+- When mobile viewport, animated button will disappear and link to Signup or Signin will appear.
+- Solid authentications implemented from backend.
+
+### Page transition
+- Framer-motion is used to make smooth trasition between pages.
