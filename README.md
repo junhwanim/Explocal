@@ -63,3 +63,24 @@ Head over to https://localhost:3000 to view the project.
 
 ### Page transition
 - Framer-motion is used to make smooth trasition between pages.
+
+## Dependencies used in the front-end:
+```json
+"dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "framer-motion": "^4.1.17",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-rating-stars-component": "^2.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-scroll": "^1.8.2",
+    "react-select": "^4.3.1",
+    "styled-components": "^5.3.0",
+    "web-vitals": "^1.0.1"
+  }
+```
