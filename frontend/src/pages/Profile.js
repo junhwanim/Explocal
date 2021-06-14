@@ -10,8 +10,13 @@ import { motion } from "framer-motion";
 import ScrollToTop from "../components/ScrollToTop";
 
 function Profile() {
-  const { setReload, currentUser, allUsers, setCurrentUser, pageTransition, pageVariants } =
-    useContext(DataContext);
+  const {
+    setReload,
+    currentUser,
+    setCurrentUser,
+    pageTransition,
+    pageVariants,
+  } = useContext(DataContext);
   const [errMessage, setErrMessage] = useState("");
   const [passwordErrMessage, setPasswordErrMessage] = useState("");
 
@@ -102,262 +107,280 @@ function Profile() {
 
   return (
     <>
-    <ScrollToTop/>
-    <motion.div
+      <ScrollToTop />
+      <motion.div
         initial="initial"
         animate="in"
         exit="out"
         variants={pageVariants}
         transition={pageTransition}
-        style={{position: "absolute", width: "100vw"}}
+        style={{ position: "absolute", width: "100vw" }}
       >
-      <SecondNavbar />
-      <ProfileContainer>
-        <ProfileLeft>
-          <Img src={BgImage} />
-        </ProfileLeft>
-        <ProfileMain>
-          <EditInfo>EDIT INFORMATION</EditInfo>
-          <ProfilePic src={currentUser.avatarSrc} />
-          <SignupWrap>
-            <AccountInfo>ACCOUNT INFORMATION</AccountInfo>
-            <InputDiv>
-              <OuterSpan>
-                <Input
-                  className="inputText"
-                  type="text"
-                  name="name"
-                  defaultValue={currentUser.name}
-                  required
-                  onChange={(ev) => handleFormChange(ev.target.value, "name")}
-                />
-                <InnerSpan className="floating-label">Name</InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            <InputDiv>
-              <OuterSpan>
-                <Input
-                  className="inputText"
-                  type="text"
-                  name="avatarSrc"
-                  required
-                  defaultValue={currentUser.avatarSrc}
-                  onChange={(ev) =>
-                    handleFormChange(ev.target.value, "avatarSrc")
-                  }
-                />
-                <InnerSpan className="floating-label">Image URL</InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            <InputDiv>
-              <OuterSpan>
-                <Select
-                  className="inputText"
-                  type="text"
-                  name="local"
-                  required
-                  onChange={(ev) => handleFormChange(ev.target.value, "local")}
-                >
-                  {currentUser.local === "true" ? (
-                    <option selected disabled value="true">
-                      Yes
-                    </option>
-                  ) : (
-                    <option selected disabled value="false">
-                      No
-                    </option>
-                  )}
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </Select>
-                <InnerSpan className="floating-label">
-                  Available as a local?
-                </InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            <InputDiv>
-              <OuterSpan>
-                <Input
-                  className="inputText"
-                  type="text"
-                  name="email"
-                  required
-                  defaultValue={currentUser.email}
-                  onChange={(ev) => handleFormChange(ev.target.value, "email")}
-                />
-                <InnerSpan className="floating-label">Email</InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            <Row>
-              <SmallInputDivLeft>
+        <SecondNavbar />
+        <ProfileContainer>
+          <ProfileLeft>
+            <Img src={BgImage} />
+          </ProfileLeft>
+          <ProfileMain>
+            <EditInfo>EDIT INFORMATION</EditInfo>
+            <ProfilePic src={currentUser.avatarSrc} />
+            <SignupWrap>
+              <AccountInfo>ACCOUNT INFORMATION</AccountInfo>
+              <InputDiv>
                 <OuterSpan>
-                  <SmallInput
+                  <Input
                     className="inputText"
                     type="text"
-                    name="country"
+                    name="name"
+                    defaultValue={currentUser.name}
                     required
-                    defaultValue={currentUser.country}
+                    onChange={(ev) => handleFormChange(ev.target.value, "name")}
+                  />
+                  <InnerSpan className="floating-label">Name</InnerSpan>
+                </OuterSpan>
+              </InputDiv>
+              <InputDiv>
+                <OuterSpan>
+                  <Input
+                    className="inputText"
+                    type="text"
+                    name="avatarSrc"
+                    required
+                    defaultValue={currentUser.avatarSrc}
                     onChange={(ev) =>
-                      handleFormChange(ev.target.value, "country")
+                      handleFormChange(ev.target.value, "avatarSrc")
                     }
                   />
-                  <InnerSpan className="floating-label">Country</InnerSpan>
+                  <InnerSpan className="floating-label">Image URL</InnerSpan>
                 </OuterSpan>
-              </SmallInputDivLeft>
-              <SmallInputDivRight>
+              </InputDiv>
+              <InputDiv>
                 <OuterSpan>
-                  <SmallInput
+                  <Select
                     className="inputText"
                     type="text"
-                    name="city"
+                    name="local"
                     required
-                    defaultValue={currentUser.city}
-                    onChange={(ev) => handleFormChange(ev.target.value, "city")}
-                  />
-                  <InnerSpan className="floating-label">City</InnerSpan>
+                    onChange={(ev) =>
+                      handleFormChange(ev.target.value, "local")
+                    }
+                  >
+                    {currentUser.local === "true" ? (
+                      <option selected disabled value="true">
+                        Yes
+                      </option>
+                    ) : (
+                      <option selected disabled value="false">
+                        No
+                      </option>
+                    )}
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </Select>
+                  <InnerSpan className="floating-label">
+                    Available as a local?
+                  </InnerSpan>
                 </OuterSpan>
-              </SmallInputDivRight>
-            </Row>
-            <InputDiv>
-              <OuterSpan>
-                <Textarea
-                  className="inputText"
-                  type="text"
-                  name="bio"
-                  required
-                  defaultValue={currentUser.bio}
-                  onChange={(ev) => handleFormChange(ev.target.value, "bio")}
-                />
-                <InnerSpan className="floating-label">Biography</InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            <InputDiv>
-              <OuterSpan>
-                <Input
-                  className="inputText"
-                  type="text"
-                  name="username"
-                  required
-                  defaultValue={currentUser.username}
-                  onChange={(ev) =>
-                    handleFormChange(ev.target.value, "username")
-                  }
-                />
-                <InnerSpan className="floating-label">Username</InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            {subStatus === "confirmed" && (
-              <p
-                style={{
-                  color: "#4ba511",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <BsCheckCircle style={{ marginRight: "5px" }} /> Changes Updated
-              </p>
-            )}
-            {errMessage && (
-              <p
-                style={{ color: "red", marginTop: "5px", textAlign: "center" }}
-              >
-                {errMessage}
-              </p>
-            )}
-            <BtnWrap>
-              <Btn
-                onClick={() => {
-                  updateUser();
-                }}
-              >
-                Save Changes
-              </Btn>
-            </BtnWrap>
-            <ChangePassword>CHANGE PASSWORD</ChangePassword>
-            <InputDiv>
-              <OuterSpan>
-                <Input
-                  style={{ letterSpacing: "4px" }}
-                  className="inputText"
-                  type="password"
-                  name="currentPassword"
-                  required
-                  ref={currentPasswordRef}
-                  onChange={(ev) =>
-                    handlePasswordFormChange(ev.target.value, "currentPassword")
-                  }
-                />
-                <InnerSpan className="floating-label">
-                  Current Password
-                </InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            <InputDiv>
-              <OuterSpan>
-                <Input
-                  style={{ letterSpacing: "4px" }}
-                  className="inputText"
-                  type="password"
-                  name="Password"
-                  required
-                  ref={passwordRef}
-                  onChange={(ev) =>
-                    handlePasswordFormChange(ev.target.value, "password")
-                  }
-                />
-                <InnerSpan className="floating-label">New Password</InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            <InputDiv>
-              <OuterSpan>
-                <Input
-                  style={{ letterSpacing: "4px" }}
-                  className="inputText"
-                  type="password"
-                  name="password2"
-                  required
-                  ref={password2Ref}
-                  onChange={(ev) =>
-                    handlePasswordFormChange(ev.target.value, "password2")
-                  }
-                />
-                <InnerSpan className="floating-label">
-                  Confirm your password
-                </InnerSpan>
-              </OuterSpan>
-            </InputDiv>
-            {passwordStatus === "confirmed" && (
-              <p
-                style={{
-                  color: "#4ba511",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <BsCheckCircle style={{ marginRight: "5px" }} /> Password
-                Updated
-              </p>
-            )}
-            {passwordErrMessage && (
-              <p
-                style={{ color: "red", marginTop: "5px", textAlign: "center" }}
-              >
-                {passwordErrMessage}
-              </p>
-            )}
-            <BtnWrap>
-              <Btn
-                onClick={() => {
-                  updatePassword();
-                }}
-              >
-                Save Password
-              </Btn>
-            </BtnWrap>
-          </SignupWrap>
-        </ProfileMain>
-      </ProfileContainer>
-      <Footer />
+              </InputDiv>
+              <InputDiv>
+                <OuterSpan>
+                  <Input
+                    className="inputText"
+                    type="text"
+                    name="email"
+                    required
+                    defaultValue={currentUser.email}
+                    onChange={(ev) =>
+                      handleFormChange(ev.target.value, "email")
+                    }
+                  />
+                  <InnerSpan className="floating-label">Email</InnerSpan>
+                </OuterSpan>
+              </InputDiv>
+              <Row>
+                <SmallInputDivLeft>
+                  <OuterSpan>
+                    <SmallInput
+                      className="inputText"
+                      type="text"
+                      name="country"
+                      required
+                      defaultValue={currentUser.country}
+                      onChange={(ev) =>
+                        handleFormChange(ev.target.value, "country")
+                      }
+                    />
+                    <InnerSpan className="floating-label">Country</InnerSpan>
+                  </OuterSpan>
+                </SmallInputDivLeft>
+                <SmallInputDivRight>
+                  <OuterSpan>
+                    <SmallInput
+                      className="inputText"
+                      type="text"
+                      name="city"
+                      required
+                      defaultValue={currentUser.city}
+                      onChange={(ev) =>
+                        handleFormChange(ev.target.value, "city")
+                      }
+                    />
+                    <InnerSpan className="floating-label">City</InnerSpan>
+                  </OuterSpan>
+                </SmallInputDivRight>
+              </Row>
+              <InputDiv>
+                <OuterSpan>
+                  <Textarea
+                    className="inputText"
+                    type="text"
+                    name="bio"
+                    required
+                    defaultValue={currentUser.bio}
+                    onChange={(ev) => handleFormChange(ev.target.value, "bio")}
+                  />
+                  <InnerSpan className="floating-label">Biography</InnerSpan>
+                </OuterSpan>
+              </InputDiv>
+              <InputDiv>
+                <OuterSpan>
+                  <Input
+                    className="inputText"
+                    type="text"
+                    name="username"
+                    required
+                    defaultValue={currentUser.username}
+                    onChange={(ev) =>
+                      handleFormChange(ev.target.value, "username")
+                    }
+                  />
+                  <InnerSpan className="floating-label">Username</InnerSpan>
+                </OuterSpan>
+              </InputDiv>
+              {subStatus === "confirmed" && (
+                <p
+                  style={{
+                    color: "#4ba511",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <BsCheckCircle style={{ marginRight: "5px" }} /> Changes
+                  Updated
+                </p>
+              )}
+              {errMessage && (
+                <p
+                  style={{
+                    color: "red",
+                    marginTop: "5px",
+                    textAlign: "center",
+                  }}
+                >
+                  {errMessage}
+                </p>
+              )}
+              <BtnWrap>
+                <Btn
+                  onClick={() => {
+                    updateUser();
+                  }}
+                >
+                  Save Changes
+                </Btn>
+              </BtnWrap>
+              <ChangePassword>CHANGE PASSWORD</ChangePassword>
+              <InputDiv>
+                <OuterSpan>
+                  <Input
+                    style={{ letterSpacing: "4px" }}
+                    className="inputText"
+                    type="password"
+                    name="currentPassword"
+                    required
+                    ref={currentPasswordRef}
+                    onChange={(ev) =>
+                      handlePasswordFormChange(
+                        ev.target.value,
+                        "currentPassword"
+                      )
+                    }
+                  />
+                  <InnerSpan className="floating-label">
+                    Current Password
+                  </InnerSpan>
+                </OuterSpan>
+              </InputDiv>
+              <InputDiv>
+                <OuterSpan>
+                  <Input
+                    style={{ letterSpacing: "4px" }}
+                    className="inputText"
+                    type="password"
+                    name="Password"
+                    required
+                    ref={passwordRef}
+                    onChange={(ev) =>
+                      handlePasswordFormChange(ev.target.value, "password")
+                    }
+                  />
+                  <InnerSpan className="floating-label">New Password</InnerSpan>
+                </OuterSpan>
+              </InputDiv>
+              <InputDiv>
+                <OuterSpan>
+                  <Input
+                    style={{ letterSpacing: "4px" }}
+                    className="inputText"
+                    type="password"
+                    name="password2"
+                    required
+                    ref={password2Ref}
+                    onChange={(ev) =>
+                      handlePasswordFormChange(ev.target.value, "password2")
+                    }
+                  />
+                  <InnerSpan className="floating-label">
+                    Confirm your password
+                  </InnerSpan>
+                </OuterSpan>
+              </InputDiv>
+              {passwordStatus === "confirmed" && (
+                <p
+                  style={{
+                    color: "#4ba511",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <BsCheckCircle style={{ marginRight: "5px" }} /> Password
+                  Updated
+                </p>
+              )}
+              {passwordErrMessage && (
+                <p
+                  style={{
+                    color: "red",
+                    marginTop: "5px",
+                    textAlign: "center",
+                  }}
+                >
+                  {passwordErrMessage}
+                </p>
+              )}
+              <BtnWrap>
+                <Btn
+                  onClick={() => {
+                    updatePassword();
+                  }}
+                >
+                  Save Password
+                </Btn>
+              </BtnWrap>
+            </SignupWrap>
+          </ProfileMain>
+        </ProfileContainer>
+        <Footer />
       </motion.div>
     </>
   );

@@ -81,7 +81,6 @@ function Selects() {
         <Select
           id="country-select"
           onChange={(value) => {
-            console.log("taco2", cityRef.current);
             cityRef.current.state.label = "";
             cityRef.current.state.value = "";
             setCountryValue(value);
@@ -120,7 +119,9 @@ function Selects() {
           Discover Locals
         </ShowLocals>
       ) : countryValue && cityValue ? (
-        <ShowLocals to={`/locals/${cityValue.label}`}>Discover locals</ShowLocals>
+        <ShowLocals to={`/locals/${cityValue.label}`}>
+          Discover locals
+        </ShowLocals>
       ) : (
         <ShowLocals
           to={`/locals/${cityValue.label}`}

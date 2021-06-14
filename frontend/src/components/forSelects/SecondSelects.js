@@ -83,7 +83,6 @@ function SecondSelects() {
           <Select
             id="country-select"
             onChange={(value) => {
-              console.log("taco2", cityRef.current);
               cityRef.current.state.label = "";
               cityRef.current.state.value = "";
               setCountryValue(value);

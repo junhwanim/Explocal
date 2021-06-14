@@ -6,7 +6,7 @@ import Signin from "./pages/Signin";
 import Locals from "./pages/Locals";
 import LocalDetail from "./pages/LocalDetail";
 import Profile from "./pages/Profile";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence} from "framer-motion";
 
 function AppLocation() {
   const location = useLocation();
