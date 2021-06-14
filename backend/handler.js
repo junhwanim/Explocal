@@ -109,7 +109,7 @@ const createUser = async (req, res) => {
     avatarSrc,
     local,
   };
-  console.log(userBody, "user");
+  // console.log(userBody, "user");
   const client = await new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("explocal");
