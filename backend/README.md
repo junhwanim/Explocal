@@ -188,10 +188,9 @@ If the authentications fail, It will show the error accordingly.
 
 Once user is loggedin, the user can go to profile page and change the password.
 
-If the informations pass every authentications, this endpoint will update the new password.
+If the informations pass every authentications, this endpoint will update the new password  in MongoDB.
 
 <img width="100%" alt="Screen Shot 2021-06-14 at 2 24 21 PM" src="https://user-images.githubusercontent.com/77517752/121940738-6ad42b00-cd1c-11eb-997b-5d125d82b276.png">
- in MongoDB.
 
 If the authentications fail, It will show the error accordingly.
 
