@@ -30,3 +30,10 @@ Head over to https://localhost:3000 to view the project.
 **Endpoints have been documented in [backend/README.md](https://github.com/junhwanim/Explocal/blob/main/backend/README.md)**
 
 ## What has been implemented in this project
+
+### Home
+#### Three different sections with scroll effect by **react-scroll**
+- Home section inlcudes : brief explanation about Explocal and link to sign-up page.
+- About section is to introduce Explocal to you.
+- Meet-Guides section is where you can choose your desired destination and see our locals in that specific destination.
+- Contact section is where you can contact Explocal's team about anything.
