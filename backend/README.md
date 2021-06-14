@@ -30,3 +30,26 @@ Add a `proxy` to the server in `client/package.json`. This will allow you to use
 ---
 
 # Endpoints
+
+## GET /api/destinations
+
+This endpoint fetches all the destinations from MongoDB.
+
+Should come in this structure:
+
+```json
+{
+  "status":200,
+  "message":"Success",
+  "data":
+    [
+      {
+        "_id":"60a40667f410a8287a97e875",
+        "code":"CA",
+        "country":"Canada",
+        "cities":
+          ["Montreal","Ottawa","Toronto","Vancouver"]
+      }
+    ]
+}
+```
