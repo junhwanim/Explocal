@@ -1,10 +1,10 @@
 # Explocal
 
-Demo: https://www.youtube.com/watch?v=XwwbCloyKL8&list=LL26-WqlbpZtXHHqp_Of7WzA
+Demo: 
 
 # Description
 
-This is a group e-commerce shop where you can shop for sports items. This fully responsive project has been built on **React**, **Node.js**, and styled with **styled-components**.
+This is a website for travellers or new-comers to travel or make new friends with the local people in their desired destinations. This fully responsive project has been built on **React**, **Node.js**, and styled with **styled-components**.
 
 ## Contributers
 
