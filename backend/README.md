@@ -198,7 +198,7 @@ Once user is loggedin, the user can go to profile page and change the password.
 If the informations pass every authentications, this endpoint will update the new password  in MongoDB.
 
 <p align="center">
-<img width="auto" height="700px" alt="Screen Shot 2021-06-14 at 2 24 21 PM" src="https://user-images.githubusercontent.com/77517752/121940738-6ad42b00-cd1c-11eb-997b-5d125d82b276.png">
+<img width="auto" height="500px" alt="Screen Shot 2021-06-14 at 2 24 21 PM" src="https://user-images.githubusercontent.com/77517752/121940738-6ad42b00-cd1c-11eb-997b-5d125d82b276.png">
 </p>
 
 If the authentications fail, It will show the error accordingly.
