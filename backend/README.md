@@ -130,7 +130,7 @@ Once the loggedin-user write a review on another user, this endpoint will update
 When loggedin-user writes new review like below:
 
 <p align="center">
-<img width="auto" height=""700px alt="Screen Shot 2021-06-14 at 1 44 12 PM" src="https://user-images.githubusercontent.com/77517752/121935611-9fdd7f00-cd16-11eb-83cf-42a8eba04a25.png">
+<img width="auto" height="500px" alt="Screen Shot 2021-06-14 at 1 44 12 PM" src="https://user-images.githubusercontent.com/77517752/121935611-9fdd7f00-cd16-11eb-83cf-42a8eba04a25.png">
 </p>
 
 This endpoint will update the given information, time, and name of the loggedin-user like below:
