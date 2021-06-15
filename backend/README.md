@@ -130,7 +130,7 @@ Once the loggedin-user write a review on another user, this endpoint will update
 When loggedin-user writes new review like below:
 
 <p align="center">
-<img width="700px" height=""700px alt="Screen Shot 2021-06-14 at 1 44 12 PM" src="https://user-images.githubusercontent.com/77517752/121935611-9fdd7f00-cd16-11eb-83cf-42a8eba04a25.png">
+<img width="auto" height=""700px alt="Screen Shot 2021-06-14 at 1 44 12 PM" src="https://user-images.githubusercontent.com/77517752/121935611-9fdd7f00-cd16-11eb-83cf-42a8eba04a25.png">
 </p>
 
 This endpoint will update the given information, time, and name of the loggedin-user like below:
@@ -150,8 +150,8 @@ This endpoint creates new user in the form format.
 
 Once it receives JSON body from the signup form and passes all authentications like below:
 
-<p>
-<img width="700px" height="700px" alt="Screen Shot 2021-06-14 at 2 04 15 PM" src="https://user-images.githubusercontent.com/77517752/121938277-99043b80-cd19-11eb-8a53-64b2b9d5887d.png">
+<p align="center">
+<img width="auto" height="700px" alt="Screen Shot 2021-06-14 at 2 04 15 PM" src="https://user-images.githubusercontent.com/77517752/121938277-99043b80-cd19-11eb-8a53-64b2b9d5887d.png">
 </p>
 
 It will update the information in MongoDB in this form:
@@ -185,8 +185,8 @@ Once user is loggedin, the user can go to profile page and edit user's informati
 
 If the informations pass every authentications, this endpoint will update the new information in MongoDB.
 
-<p>
-<img width="700px" height="700px" alt="Screen Shot 2021-06-14 at 2 18 43 PM" src="https://user-images.githubusercontent.com/77517752/121940356-00bb8600-cd1c-11eb-8b6b-84dab6705843.png">
+<p align="center">
+<img width="auto" height="700px" alt="Screen Shot 2021-06-14 at 2 18 43 PM" src="https://user-images.githubusercontent.com/77517752/121940356-00bb8600-cd1c-11eb-8b6b-84dab6705843.png">
 </p>
 
 If the authentications fail, It will show the error accordingly.
@@ -197,8 +197,8 @@ Once user is loggedin, the user can go to profile page and change the password.
 
 If the informations pass every authentications, this endpoint will update the new password  in MongoDB.
 
-<p>
-<img width="700px" height="700px" alt="Screen Shot 2021-06-14 at 2 24 21 PM" src="https://user-images.githubusercontent.com/77517752/121940738-6ad42b00-cd1c-11eb-997b-5d125d82b276.png">
+<p align="center">
+<img width="auto" height="700px" alt="Screen Shot 2021-06-14 at 2 24 21 PM" src="https://user-images.githubusercontent.com/77517752/121940738-6ad42b00-cd1c-11eb-997b-5d125d82b276.png">
 </p>
 
 If the authentications fail, It will show the error accordingly.
