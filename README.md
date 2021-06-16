@@ -6,7 +6,7 @@ Demo: https://www.youtube.com/watch?v=Mvarx_JUToY
 
 # Description
 
-This is a website for travellers, new-comers or anyone who plan to travel or make new friends with the local people in their desired destinations. This fully responsive project has been built on **React**, **Node.js**, and styled with **styled-components**.
+This is a website for travellers, new-comers or anyone who plan to travel or make new friends with the local people in their desired destinations. This fully responsive project has been built on **React**, **Node.js**, **Express**, **MongoDB** and styled with **styled-components**.
 
 ## Contributers
 
