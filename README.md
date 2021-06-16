@@ -1,6 +1,6 @@
-<span align="center">
+<p align="center">
 # Explocal
-</span>
+</p>
 
 Demo: https://www.youtube.com/watch?v=Mvarx_JUToY
 
