@@ -80,7 +80,9 @@ function Navbar({ toggle }) {
               </NavMenu>
               {currentUser ? (
                 <CurrentUser>
-                  <Greeting to="/user/profile">Welcome, {currentUser.name}</Greeting>
+                  <Greeting to="/user/profile">
+                    Welcome, {currentUser.name}
+                  </Greeting>
                   <NavBtn>
                     <NavBtnClick
                       onClick={() => {
@@ -122,7 +124,7 @@ const Greeting = styled(LinkR)`
     transform: scale(1);
   }
 
-  @media screen and (max-width:825px){
+  @media screen and (max-width: 825px) {
     margin-right: 30px;
   }
 `;
@@ -145,9 +147,10 @@ const Nav = styled.nav`
   position: sticky;
   top: 0;
   z-index: 10;
+  transition: 0.5s all ease;
 
   @media screen and (max-width: 960px) {
-    transition: 0.8s all ease;
+    transition: 0.5s all ease;
   }
 `;
 
